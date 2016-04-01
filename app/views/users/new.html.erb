@@ -1,0 +1,55 @@
+ 
+<div  class="well" style="height: 550px;">
+    <div id="colorBar">
+            <div class="grn"></div>
+            <div class="red"></div>
+            <div class="yel"></div>
+            <div class="prp"></div>
+        </div></br>
+        <div class="login_error_widget">
+            
+        </div>
+        <div style="position:relative;left:26px;top:-10px;">
+<%=form_for @user, html: {class: "form-horizontal "}  do |f| %>
+    <h3 style="color:black">Sign Up</h3>
+    <div class="form-group">
+    
+    <div class="col-sm-10">
+    <%= f.text_field :first_name , :placeholder => "First Name", class:"form-control"%>
+    </div>
+    </div>
+   <br/>
+
+    <div class="form-group">
+   
+    <div class="col-sm-10">
+    <%= f.text_field :last_name , :placeholder => "Last Name", class:" form-control"%>
+    </div>
+    </div>
+    <br/>
+
+
+    <div class="form-group">
+    
+    <div class="col-sm-10">
+    <%= f.email_field :email , :placeholder => "Email : someone@example.com", class:" form-control"%>
+    </div>
+    </div>
+   
+ <br/>
+
+    <div class="form-group">
+    
+    <div class="col-sm-10">
+    <%= f.password_field :password , :placeholder => "Password", class:" form-control"%>
+    </div>
+    </div>
+   
+<br/>
+
+    <%= f.submit "Create an account", class: "btn btn-primary" %>
+
+<%end%>
+
+</div>
+</div>
