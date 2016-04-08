@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../dist/css/animsition.min.css">
+  <script src="../dist/js/jquery-1.12.2.min.js"></script>
+  <script src="../dist/js/bootstrap.min.js"></script>
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,400italic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="../dist/css/flat-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="../dist/css/animate.css">
+  <script type="text/javascript" src="../dist/js/wow.min.js"></script>
+  
+  </head>
+  <style>
+  	/* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <body>
+  	
+  	 <nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">TATA CONSULTANCY SERVICES LIMITED</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+<% if current_user %> 
+        <ul class="nav navbar-nav navbar-right">
+          <li style="color: white;"><%= current_user.email %></li>
+          <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+        </ul>
+ <% else %> 
+             <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Login", 'login' %></li>
+            <li><%= link_to "Signup", 'signup' %></li>
+          </ul>
+          <% end %>
+      </div>
+    </div>
+  </nav>
+  
+  
+  <div style="overflow:hidden;" class="container-fluid text-center">    
+  <div class="row content col-md-12">
+   
+    <div style="position:relative" id="wel" class="col-md-8 col-md-offset-2"> 
+    	<div  class="animsition" style="opacity: 1;">
+     	 <%= yield %>
+      	</div>
+    </div>
+    
+	<div style="position:relative;text-align:right;left:2500px" id="some1" class="col-md-4"><h3>Some content here</h3></div>
+  </div>
+  
+</div>
+
+<!--footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- animsition.js -->
+<script src="../dist/js/animsition.min.js"></script>
+<script>
+	$(document).ready(function() {
+  $(".animsition").animsition({
+    inClass: 'fade-in-left',
+    outClass: 'fade-out-right',
+    inDuration: 1500,
+    outDuration: 800,
+    linkElement: '.animsition-link',
+    // e.g. linkElement: 'a:not([target="_blank"]):not([href^=#])'
+    loading: true,
+    loadingParentElement: 'body', //animsition wrapper element
+    loadingClass: 'animsition-loading',
+    loadingInner: '', // e.g '<img src="loading.svg" />'
+    timeout: false,
+    timeoutCountdown: 5000,
+    onLoadEvent: true,
+    browser: [ 'animation-duration', '-webkit-animation-duration'],
+    // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+    // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+    overlay : false,
+    overlayClass : 'animsition-overlay-slide',
+    overlayParentElement : 'body',
+    transition: function(url){ window.location.href = url; }
+  });
+});
+</script>
+  </body>
+</html>

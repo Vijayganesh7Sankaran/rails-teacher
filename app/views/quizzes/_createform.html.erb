@@ -1,0 +1,36 @@
+<div class="create">
+<%= form_for @admin do |f|  %>
+<div class="col-md-12">
+	<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+ <%= f.label :quiz_name %>:
+  <%= f.text_field :quiz_name, class: "col-md-6 form-control"%><br />
+  </div>
+
+<div class="col-md-8 col-md-offset-2">
+  <%= f.label :category_name %>:
+  <%= f.text_field :category_name , class: "col-md-6 form-control"%><br />
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+<%= f.label :duration %>:
+  <%= f.time_field :duration, class: "col-md-6 form-control" %><br />
+</div>
+</div>
+<br />
+<div class="row col-md-6 col-md-offset-3">
+	<%= f.submit "Create quiz", id: "submit" %>
+ </div>
+ <div>
+ 	<a class="animsition-link" id="test" href="../questions"></a>
+
+</div>
+<%end%>
+</div>
+</div>
+
+<script>
+	$('#submit').on("click",function() {
+  		$('#test').trigger("click");
+	});
+</script>

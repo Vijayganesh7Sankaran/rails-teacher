@@ -1,15 +1,56 @@
 Rails.application.routes.draw do
   
-  get 'game/view'
+  get 'badges/new'
+
+  get 'badges/create'
+
+  get 'badges/view'
+
+  get 'badges/update'
+
+  get 'badges/destroy'
+
+  get 'options/new'
+
+  get 'options/create'
+
+  get 'options/view'
+
+  get 'options/update'
+
+  get 'options/destroy'
+
+  get 'questions'=>'questions#new'
+
+  post 'questions/create' => 'questions#create'
+  get 'output' => 'questions#index'
+
+  get 'questions/view'
+
+  get 'questions/update'
+
+  get 'questions/destroy'
+
+  get 'quiz' => 'quizzes#index'
+
+  get 'admin' => 'quizzes#admin'
 
   get 'signup' => 'users#new'
+  get '/questions/index' => 'questions#index'
   resources :users
-
+  resources :quizzes
+  resources :questions
+  resources :options
+  resources :badges
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
 
   delete 'logout' => 'sessions#destroy'
   get 'gameview' => 'game#view'
+  get 'quiz_one' => 'game#game_one'
+  get 'quizzes/destroy'
+  get 'quizzes/update'
+ 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

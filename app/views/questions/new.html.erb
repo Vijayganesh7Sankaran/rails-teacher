@@ -1,0 +1,172 @@
+<!--div class="ques">
+<%= form_for @question,:url=> questions_create_path,method: :post do |f|  %>
+<div class="col-md-12">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<%= f.label :question %>:
+<%= f.text_field :question, class: "col-md-6 form-control"%><br />
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+<%= f.label :point %>:
+<%= f.text_field :point, class: "col-md-6 form-control" %><br />
+</div>
+
+<div class="row col-md-6 col-md-offset-3">
+
+<input type="hidden" name="quiz_id" value="<%=@quiz_id%>" />
+<%= f.submit "create question"%>
+</div>
+<%end%>
+</div-->
+<div class="container">
+<div class="questionsAll">
+	<div class="row">
+		<div style="margin-top:3em" class="col-md-8 ">
+
+			<div class="questionField">
+				<br />
+				<div id="Quiz1" class="questionsField well">
+					<div id="questionText1" class="questionText">
+						Question:
+						<input type="text" id="Question1" class="form-control" />
+						<br />
+					</div>
+
+					<div class="Quiz1options">
+						<div  id="Quiz1Q1option1">
+							<div class="row">
+								<div class="col-md-6">
+									Option 1:
+									<div class="input-group">
+										<input type="text" class="form-control"/>
+										<!--span class="input-group-addon">
+										<span class="glyphicon glyphicon-trash"></span>
+										</span-->
+									</div>
+								</div>
+							</div>
+							<br />
+						</div>
+
+						<div  id="Quiz1Q2option2">
+							<div class="row">
+								<div class="col-md-6">
+
+									<span class="optionText">Option 2:</span>
+									<div class="input-group">
+
+										<input type="text" class="form-control"/>
+										<!--span class="input-group-addon">
+										<span class="glyphicon glyphicon-trash"></span>
+
+										</span-->
+									</div>
+								</div>
+							</div>
+							<br />
+						</div>
+
+					</div>
+				</div>
+			</div>
+			</div>
+			<div style="margin-top:15em;position:fixed;left:66%;" class="well col-md-4">
+				<div id ="Quiz1Q1addO1"  class=" addO btn btn-primary col-md-offset-4">
+					<img src ='images/notification_add.png' width="50" height="50"	/>
+					Add Option
+				</div>
+				<br />
+				<br />
+				<div id="addQ" class="btn btn-primary col-md-offset-4">
+					<img src ='images/file_add.png' width="50" height="50"	/>
+					Add Question
+					</div>
+			</div>
+
+		
+		
+	</div>
+</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		var quiz = 1;
+		var questionCount = 1;
+		var optionCount = 1;
+		var optionNo = 2;
+		var questionNo = 1;
+		var toggleSelected;
+		var i=0;
+		
+		$('#addQ').click(function() {
+
+			alert('clicked');
+			var optionSurr1 = $('#Quiz' + optionCount + 'Q' + optionCount + 'option' + optionCount).clone().html();
+			var optionSurr2 = $('#Quiz' + (optionCount) + 'Q' + (optionCount+1) + 'option' + (optionCount+1)).clone().html();
+			alert(optionSurr2);
+			var contSurr = '<div id="Quiz' + (questionCount + 1) + '" class="questionsField well"><div id="questionText' + (questionCount + 1) + '"">' + $('#questionText' + questionCount).clone().html() + '</div><div id="Quiz'+ questionCount +'options">'+ optionSurr1 + optionSurr2 +'</div>';                                  
+			//var cont = $('#questionText'+questionCount).clone();
+			$(contSurr).find('#Question' + (questionCount)).attr('id', 'Question' + (questionCount + 1));
+			//$('Question'+(questionCount+1)).parent().attr('id','questionText'+(questionCount+1));
+			$('.questionField').append(contSurr)
+			questionCount++;
+
+			
+			//$('#Quiz2options').append(optionSurr);
+
+		});
+		
+		
+		
+		/*$(document).on('click',document,function() {
+   			 alert('clicked outside');
+   			 if(toggleSelected != null)
+   			 {
+   			 	//alert('yes');
+   			 	$('#'+toggleSelected).css('background-color','#F5F5F5');
+   			 	toggleSelected = null;
+   			 	
+   			 }
+		});*/
+		$(document).on('click','.questionsField',function(){
+			
+			
+			if(toggleSelected != null)
+			{
+				alert('yes');
+				$('#'+toggleSelected).css('background-color','#F5F5F5');
+				$(this).css('background-color','#9AFF9A');
+				toggleSelected = $(this).attr('id');
+			} 
+			else
+			{
+				toggleSelected = $(this).attr('id');
+		    	alert('clicked inside');
+		    	//alert($(this).css('background-color'));
+		    	$(this).css('background-color','#9AFF9A');
+ 		   		// event.stopPropagation();		
+ 		   }
+ 		   	
+	   });
+	   
+	   
+	   
+	   $('.addO').click(function() {
+			alert('clicked');
+			alert(toggleSelected);
+			$("#Quiz" + quiz + "Q" + optionNo + "option" + optionNo).clone().attr('id', "Quiz" + quiz + "Q" + (optionNo + 1) + "option" + (optionNo + 1)).appendTo("."+toggleSelected+"options");
+
+			optionNo++;
+			$("#Quiz" + quiz + "Q" + optionNo + "option" + optionNo).find('.optionText').text('Option ' + optionNo);
+		});
+		
+		
+	   /*$(document).on('mouseover','.questionField',function(){
+	   		alert('yes');
+	   });*/
+		
+	});
+
+</script>
