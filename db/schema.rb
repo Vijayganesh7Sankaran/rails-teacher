@@ -56,7 +56,8 @@ ActiveRecord::Schema.define(version: 20160405043756) do
   create_table "quizzes", force: :cascade do |t|
     t.string   "quiz_name",     limit: 255
     t.string   "category_name", limit: 255
-    t.time     "duration"
+    t.string   "level",         limit: 255
+    t.integer  "duration",      limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

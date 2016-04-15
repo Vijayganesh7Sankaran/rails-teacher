@@ -1,2 +1,61 @@
-<h1>Questions#view</h1>
-<p>Find me in app/views/questions/view.html.erb</p>
+<!--div<%@question.each do |t| %>
+<ul>
+  <li><%=t.question%></li>
+    <ul>
+       <% i =0 %>
+       <% while i < @hash[t.id].length do %>
+      <li><%= @hash[t.id][i] %></li>
+      <% i+=1 %>
+      <% end  %>
+  </ul>
+</ul>
+<%end%>
+</div -->
+<div class="container">
+<%@question.each do |t| %>
+<div id="Quiz1" class="questionsField well">
+  <div id="questionText1" class="questionText">
+    Question:
+    <input type="text" id="Question1" class="form-control" value="<%= t.question %>" />
+    <br />
+  </div>
+  <div id="Quiz1options">
+    <% i =0 %>
+    <% while i < @hash[t.id].length do %>
+    <div class="row" style="margin:1em;">
+      <div class="col-md-10">
+
+        <span class="optionText">Option:</span>
+        <div class="input-group">
+
+          <input id="Q1O2" type="text" value="<%= @hash[t.id][i] %>" class="form-control" />
+          <span class="input-group-addon">
+										<span class="glyphicon glyphicon-trash"></span>
+
+          </span>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div style="margin:1.2em" class="radio">
+          <label>
+            <input type="radio" name="optradio1">
+          </label>
+        </div>
+      </div>
+    </div>
+    <% i+=1 %>
+    <% end  %>
+  </div>
+</div>
+<% end %>						
+
+<br />
+<div class="well col-md-12">
+  <div class="row col-md-12">
+  <button class="btn btn-success col-md-3 col-md-offset-1">Make changes</button>
+  <button class="btn btn-danger col-md-3 col-md-offset-1">Delete Quiz</button>
+  <button class="btn btn-primary col-md-3 col-md-offset-1">Go back to quizzes</button>
+  </div>
+</div>
+
+</div>

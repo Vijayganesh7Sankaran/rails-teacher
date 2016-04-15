@@ -1,36 +1,77 @@
-<div class="create">
-<%= form_for @admin do |f|  %>
-<div class="col-md-12">
-	<div class="row">
-	<div class="col-md-8 col-md-offset-2">
- <%= f.label :quiz_name %>:
-  <%= f.text_field :quiz_name, class: "col-md-6 form-control"%><br />
-  </div>
+<div class="">
 
-<div class="col-md-8 col-md-offset-2">
-  <%= f.label :category_name %>:
-  <%= f.text_field :category_name , class: "col-md-6 form-control"%><br />
-</div>
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Create a New Quiz</h3>
+            </div>
+            <div class="title_right">
+              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>New Quiz <small> - please fill the following details.</small></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br />
+                  
+                  <%= form_for @admin, :html => {:class => 'form-horizontal form-label-left'} do |f|  %>
+                  <form id="demo-form2" data-parsley-validate class="">
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="quiz-name">Quiz Name<span class="required">*</span> :
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= f.text_field :quiz_name, class:"form-control col-md-7 col-xs-12", required:"required" %>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category">Category Name<span class="required">*</span> :
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= f.text_field :category_name, class:"form-control col-md-7 col-xs-12", required:"required" %>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Level :</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= f.select :level, ['Beginner', 'Intermediate','Advanced'], {}, { :class => 'form-control' } %>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Duration :</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= f.select :duration, [15, 20,25,30,35,40,45], {}, { :class => 'form-control' } %>
+                      </div>
+                    </div>
+                    
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="submit" class="btn btn-primary">Cancel</button>
+	                     <%= f.submit "Create quiz", id: "submit", class:"btn btn-success" %>
+                      </div>
+                    </div>
 
-<div class="col-md-8 col-md-offset-2">
-<%= f.label :duration %>:
-  <%= f.time_field :duration, class: "col-md-6 form-control" %><br />
-</div>
-</div>
-<br />
-<div class="row col-md-6 col-md-offset-3">
-	<%= f.submit "Create quiz", id: "submit" %>
- </div>
- <div>
- 	<a class="animsition-link" id="test" href="../questions"></a>
-
-</div>
+                  </form>
+                  
 <%end%>
-</div>
+                </div>
+              </div>
+            </div>
+          </div>
 </div>
 
-<script>
-	$('#submit').on("click",function() {
-  		$('#test').trigger("click");
-	});
-</script>
+

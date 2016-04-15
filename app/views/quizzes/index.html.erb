@@ -1,6 +1,6 @@
 <div class="listing" >
 <%@adm.each do |t| %>
-<%=link_to t.quiz_name,{:controller =>"questions", :action =>"new" ,:id =>t.id} %>
+<%=link_to t.quiz_name,{:controller =>"questions", :action =>"view" ,:id =>t.id} %>
 
 <%end%>
 </div>

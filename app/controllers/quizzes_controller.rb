@@ -1,6 +1,6 @@
 class QuizzesController < ApplicationController
   
-  layout 'admin'
+  layout 'homepage'
   def admin
     
   end
@@ -13,7 +13,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @admin = Quiz.new(params.require(:quiz).permit(:quiz_name,:category_name,:duration))
+    @admin = Quiz.new(params.require(:quiz).permit(:quiz_name,:category_name,:level,:duration))
    
     if @admin.save
        @admin_id = @admin.id

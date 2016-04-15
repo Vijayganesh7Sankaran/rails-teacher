@@ -3,7 +3,8 @@ class CreateQuizzes < ActiveRecord::Migration
     create_table :quizzes do |t|
       t.string :quiz_name
       t.string :category_name
-      t.time :duration
+      t.string :level
+      t.integer :duration
       t.timestamps null: false
     end
   end

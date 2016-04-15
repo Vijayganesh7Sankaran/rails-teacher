@@ -1,14 +1,6 @@
 Rails.application.routes.draw do
   
-  get 'badges/new'
 
-  get 'badges/create'
-
-  get 'badges/view'
-
-  get 'badges/update'
-
-  get 'badges/destroy'
 
   get 'options/new'
 
@@ -21,6 +13,8 @@ Rails.application.routes.draw do
   get 'options/destroy'
 
   get 'questions'=>'questions#new'
+  
+  post 'questions/ashi' => 'questions#ashi'
 
   post 'questions/create' => 'questions#create'
   get 'output' => 'questions#index'

@@ -3,4 +3,12 @@
 	
 <h1>Welcome !!!</h1>
 <a class="animsition-link" href="quizzes/new">Basic</a>
+<% 3.downto(0) do |i| %>
+  <% t = "00:00:#{'%02d' % i}" %>
+  <p>
+    <%= t %>
+</p>
+  <% sleep 1 %>
+<% end %>
+
 
