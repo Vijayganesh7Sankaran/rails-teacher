@@ -135,3 +135,4 @@ def ashidestroy
   @quiz.questions.destroy_all
   @quiz.destroy
 end
+end
