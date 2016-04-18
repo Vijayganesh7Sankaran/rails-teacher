@@ -294,7 +294,7 @@
                         <ul class="nav navbar-nav navbar-right" style="position: fixed; right:20px;">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="../dists/images/img.jpg" alt="">John Doe
+                                    <img src="../dists/images/profile-pic.jpg" alt="">Vickylance
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -400,12 +400,14 @@
 
                 </div>
                 
+                <div class="sizer">
                 <%= yield %>
+                </div>
                 
                 <br />
 
                 <!-- footer content -->
-                <footer style="margin-top: 250px;">
+                <footer style="position:relative; bottom:0;">
                     <div class="pull-right">
                         Gam<span style="color: #1ABB9C;">E-Learn</span> - Gamified way of Learning by - <a href="http://www.tcs.com/" style="color:#05befa; font-size:medium;">TCS</a>
                     </div>
@@ -496,5 +498,16 @@
 
     </script>
     <!--/fullscreen-->
+    <script>
+    $(document).ready(function(){
+        if($(window).outerHeight(true) > $('.sizer').outerHeight(true)){
+            $('footer').css('margin-top',$(window).outerHeight(true) - $('.sizer').outerHeight(true));
+        }
+        console.log($(window).outerHeight(true));
+        console.log($('.sizer').outerHeight(true));
+    });
+        
+    
+    </script>
 </body>
 </html>
