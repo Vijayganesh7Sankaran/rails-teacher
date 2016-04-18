@@ -1,4 +1,5 @@
 class OptionsController < ApplicationController
+  before_filter :set_cache_buster, :require_user
   def new
     @option = Option.new
     @question_id = params[:id]

@@ -1,14 +1,187 @@
 
-	
-	
-<h1>Welcome !!!</h1>
-<a class="animsition-link" href="quizzes/new">Basic</a>
-<% 3.downto(0) do |i| %>
-  <% t = "00:00:#{'%02d' % i}" %>
-  <p>
-    <%= t %>
-</p>
-  <% sleep 1 %>
-<% end %>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="dashboard_graph">
+                            <div class="row x_title">
+                                <div class="col-md-12">
+                                    <h2 id="quote-header"></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#">Settings 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Settings 2</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix">
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <blockquote>
+                                    <p id="quote-body">
+
+                                    </p>
+                                    <footer id="quote-footer"></footer>
+                                </blockquote>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel tile overflow_hidden">
+                            <div class="x_title">
+                                <h2>Visitors Online<small> - based on geolocation</small></h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+                                <div class="dashboard-widget-content">
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                        <div id="world-map-gdp" style="height:500px;"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <h2 class="line_30">Online Visitors from 60 countries</h2>
+
+                                            <table class="countries_list">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>United States</td>
+                                                        <td class="fs15 fw700 text-right">33%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>France</td>
+                                                        <td class="fs15 fw700 text-right">27%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Germany</td>
+                                                        <td class="fs15 fw700 text-right">16%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Spain</td>
+                                                        <td class="fs15 fw700 text-right">11%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Britain</td>
+                                                        <td class="fs15 fw700 text-right">10%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <h2 class="line_30">Country Score from 60 countries</h2>
+
+                                            <table class="countries_list">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>United States</td>
+                                                        <td class="fs15 fw700 text-right">33%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>France</td>
+                                                        <td class="fs15 fw700 text-right">27%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Germany</td>
+                                                        <td class="fs15 fw700 text-right">16%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Spain</td>
+                                                        <td class="fs15 fw700 text-right">11%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Britain</td>
+                                                        <td class="fs15 fw700 text-right">10%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                
+                <!--daily motivational-->
+    <script>
+        $('.tqpHeader').appendTo('#quote-header');
+        $('.tqpQuote').appendTo('#quote-body');
+        $('.tqpAuthor').appendTo('#quote-footer');
+        window.onload = function () {
+            var temp = $('#quote-header').text().replace('Motivational Quote of the Day', 'Today\'s Motivational quote for you');
+            $('#quote-header').text(temp);
+        }
+    </script>
+    <!--/daily motivational-->
+    
+        <script>
+        $(function () {
+            var map,
+      markerIndex = 0,
+      markersCoords = {};
+
+            map = new jvm.Map({
+                map: 'world_mill_en',
+                backgroundColor: '#6eb1de',
+                zoomOnScroll: false,
+                series: {
+                    regions: [{
+                        values: gdpData,
+                        scale: ['#486684', '#1b2631'],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+                markerStyle: {
+                    initial: {
+                        fill: 'red'
+                    }
+                },
+                container: $('#world-map-gdp'),
+                onRegionTipShow: function (e, el, code) {
+                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                },
+                onMarkerTipShow: function (e, label, code) {
+                    map.tip.text(markersCoords[code].lat.toFixed(2) + ', ' + markersCoords[code].lng.toFixed(2));
+                },
+                onMarkerClick: function (e, code) {
+                    map.removeMarkers([code]);
+                    map.tip.hide();
+                }
+            });
+
+            map.container.click(function (e) {
+                var latLng = map.pointToLatLng(e.offsetX, e.offsetY),
+                    targetCls = $(e.target).attr('class');
+
+                if (latLng && (!targetCls || (targetCls && $(e.target).attr('class').indexOf('jvectormap-marker') === -1))) {
+                    markersCoords[markerIndex] = latLng;
+                    map.addMarker(markerIndex, { latLng: [latLng.lat, latLng.lng] });
+                    markerIndex += 1;
+                }
+            });
+        });
+    </script>
 

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GamE-Learn | A fun way to learning</title>
+    <!-- Bootstrap core CSS -->
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+    <link href="../dists/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../dists/fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../dists/css/animate.min.css" rel="stylesheet">
+    <!-- Custom styling plus plugins -->
+    <link href="../dists/css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../dists/css/maps/jquery-jvectormap-2.0.3.css" />
+    <link href="../dists/css/icheck/flat/green.css" rel="stylesheet" />
+    <link href="../dists/css/floatexamples.css" rel="stylesheet" type="text/css" />
+    <link href="../dists/css/sweetalert.css" rel="stylesheet" type="text/css" />
+    <script src="../dists/js/jquery.min.js"></script>
+    <script src="../dists/js/nprogress.js"></script>
+    <script src="../dists/js/sweetalert.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        #exampleImage {
+            cursor: zoom-in;
+        }
+
+            #exampleImage:-webkit-full-screen {
+                cursor: zoom-out;
+            }
+
+            #exampleImage:-moz-full-screen {
+                cursor: zoom-out;
+            }
+
+            #exampleImage:-ms-fullscreen {
+                cursor: zoom-out;
+            }
+
+            #exampleImage:fullscreen {
+                cursor: zoom-out;
+            }
+    </style>
+    <style>
+        .vl-sidebar-block {
+            margin: 5px 10% 5px 10%;
+        }
+
+        @media (min-width: 991px) {
+            .nav-md .vl-side-left {
+                margin-left: 15%;
+                height: 26px;
+            }
+
+            .nav-md .vl-side-right {
+                margin-right: 15%;
+                height: 26px;
+            }
+
+            .nav-sm .vl-side-left {
+                margin-left: 25%;
+                height: 26px;
+            }
+
+            .nav-sm .vl-side-right {
+                margin-top: 20px;
+                margin-left: 25%;
+                height: 26px;
+            }
+        }
+
+        @media (max-width: 728px) {
+            .vl-side-left {
+                margin-left: 25%;
+                height: 26px;
+            }
+
+            .vl-side-right {
+                margin-top: 20px;
+                margin-left: 25%;
+                height: 26px;
+            }
+        }
+
+        .vl-side-left > .badge, .vl-side-right > .badge {
+            position: relative;
+            right: 10px;
+            top: -12px;
+        }
+
+        hr {
+            border-top: 1px solid #5a778a;
+        }
+
+        @font-face {
+            font-family: 'Comfortaa-Light';
+            src: url('../dists/fonts/comfortaa/Comfortaa-Light.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Comfortaa-Regular';
+            src: url('../dists/fonts/comfortaa/Comfortaa-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Comfortaa-Bold';
+            src: url('../dists/fonts/comfortaa/Comfortaa-Bold.ttf') format('truetype');
+        }
+
+        body {
+            font-family: Comfortaa-Regular, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+            b {
+                font-family: Comfortaa-Bold,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+    </style>
+
+    <!--JavaScript code for single Motivational Quote of the Day, http://www.tqpage.com/-->
+    <script language="javascript" src="http://www.quotationspage.com/data/1mqotd.js">
+    </script> <!--End JavaScript Quotations code-->
+    <style>
+        .tqpFooter {
+            display: none;
+        }
+
+        body > b, body > br, body > dl {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <!-- sidebar navigation -->
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><img src="../dists/images/logo/logo.png" alt="Dashboard" style="width: 50px;" /> <span>Gam<span style="color: #1ABB9C;">E-Learn</span></span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- menu prile quick info -->
+                    <div class="profile">
+                        <a href="#">
+                            <div class="profile_pic">
+                                <img src="../dists/images/profile-pic.jpg" alt="..." class="img-circle profile_img">
+                            </div>
+                        </a>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>Vickylance</h2>
+                            <b class="label label-success">User</b>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="vl-sidebar-block">
+                        <a data-toggle="tooltip" data-placement="top" title="Notifications" href="#" class="vl-side-left pull-left">
+                            <i class="fa fa-2x fa-bell"></i>
+                            <span class="badge bg-green">6</span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Messages" href="#" class="vl-side-right pull-right">
+                            <i class="fa fa-2x fa-envelope"></i>
+                            <span class="badge bg-green">2</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div style="margin-bottom: -35px">
+                    </div>
+                    <!-- /menu prile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>My Activities</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="empty.html">
+                                        <i class="fa fa-tachometer"></i>My Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-gamepad"></i> My Games <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="#">The Chaostone</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Jig-Sawtron</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Captain Planet</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">ETales</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-line-chart"></i> My Stats <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="#">Achievements &amp; badges</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">My Character</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">My History</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <h3>Social</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-users"></i> My Community <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="#">My Friends</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Leaderboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">My Blog</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" id="fullScreenBtn">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                            <% if current_user %> 
+                                <%= link_to logout_path, method: "delete", :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Logout" do %>
+                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                <% end %>
+                            <% end %>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+            <!-- sidebar navigation -->
+            <!-- top navigation -->
+            <div class="top_nav navbar-static-top">
+                <div class="nav_menu">
+                    <nav class="">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right" style="position: fixed; right:20px;">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="../dists/images/img.jpg" alt="">John Doe
+                                    <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                                    <li>
+                                        <a href="javascript:;">  Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">Help</a>
+                                    </li>
+                                    <li>
+                                        <a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="../dists/images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="../dists/images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="../dists/images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="../dists/images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div style="margin-top: 60px;">
+
+                </div>
+                
+                <%= yield %>
+                
+                <br />
+
+                <!-- footer content -->
+                <footer style="margin-top: 250px;">
+                    <div class="pull-right">
+                        Gam<span style="color: #1ABB9C;">E-Learn</span> - Gamified way of Learning by - <a href="http://www.tcs.com/" style="color:#05befa; font-size:medium;">TCS</a>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </footer>
+                <!-- /footer content -->
+                <!-- /page content -->
+
+            </div>
+            <!-- /page content -->
+            </div>
+    </div>
+    <div id="custom_notifications" class="custom-notifications dsp_none">
+        <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
+        <div class="clearfix"></div>
+        <div id="notif-group" class="tabbed_notifications"></div>
+    </div>
+    <script src="../dists/js/bootstrap.min.js"></script>
+    <!-- gauge js -->
+    <script type="text/javascript" src="../dists/js/gauge/gauge.min.js"></script>
+    <script type="text/javascript" src="../dists/js/gauge/gauge_demo.js"></script>
+    <!-- chart js -->
+    <script src="../dists/js/chartjs/chart.min.js"></script>
+    <!-- bootstrap progress js -->
+    <script src="../dists/js/progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- icheck -->
+    <script src="../dists/js/icheck/icheck.min.js"></script>
+    <!-- daterangepicker -->
+    <script type="text/javascript" src="../dists/js/moment/moment.min.js"></script>
+    <script type="text/javascript" src="../dists/js/datepicker/daterangepicker.js"></script>
+    <script src="../dists/js/custom.js"></script>
+    <!-- flot js -->
+    <!--[if lte IE 8]><script type="text/javascript" src="../dists/js/excanvas.min.js"></script><![endif]-->
+    <script type="text/javascript" src="../dists/js/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/jquery.flot.orderBars.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/jquery.flot.time.min.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/date.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/jquery.flot.spline.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/jquery.flot.stack.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/curvedLines.js"></script>
+    <script type="text/javascript" src="../dists/js/flot/jquery.flot.resize.js"></script>
+    <!-- worldmap -->
+    <script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-2.0.3.min.js"></script>
+    <script type="text/javascript" src="../dists/js/maps/gdp-data.js"></script>
+    <script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-world-mill-en.js"></script>
+    <script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-us-aea-en.js"></script>
+    <!-- pace -->
+    <script src="../dists/js/pace/pace.min.js"></script>
+    <!-- skycons -->
+    <script src="../dists/js/skycons/skycons.min.js"></script>
+    <script>
+        NProgress.done();
+    </script>
+    <!--fullscreen-->
+    <script>
+        function toggleFullscreen(elem) {
+            elem = elem || document.documentElement;
+            if (!document.fullscreenElement && !document.mozFullScreenElement &&
+              !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+
+        document.getElementById('fullScreenBtn').addEventListener('click', function () {
+            toggleFullscreen();
+        });
+
+    </script>
+    <!--/fullscreen-->
+</body>
+</html>

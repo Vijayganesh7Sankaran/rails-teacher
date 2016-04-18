@@ -38,9 +38,9 @@
 									<div id="Quiz1" class="questionsField well">
 										<div id="questionText1" class="questionText">
 											<h2>Question:</h2>
-											<input type="text" id="Question1" class="form-control" />
+											<input type="text" id="Question1" class="form-control formtext" />
 											<br /> <h2>Points:</h2>
-											<input style="width:10%" type="text" id="pts1" class="form-control" />
+											<input style="width:10%" type="text" id="pts1" class="form-control formtext" />
 											<br/>
 										</div>
 										<div id="Quiz1options">
@@ -48,8 +48,8 @@
 												<div class="row">
 													<div class="col-md-10">
 														<span class="optionText col-md-4 col-sm-4 col-xs-4"><h2>Option 1:</h2></span>
-														<div class="col-md-8 col-sm-8 col-xs-8" style="padding: 0;">
-															<input style="width: 100%;" id="Q1O1" type="text" class="form-control" />
+														<div class="col-md-8 col-sm-8 col-xs-8" style="padding: 0">
+															<input style="width: 100%;" id="Q1O1" type="text" class="form-control formtext" />
 														</div>
 													</div>
 
@@ -67,8 +67,8 @@
 												<div class="row">
 													<div class="col-md-10">
 														<span class="optionText col-md-4 col-sm-4 col-xs-4"><h2>Option 2:</h2></span>
-														<div class="col-md-8 col-sm-8 col-xs-8" style="padding: 0;">
-															<input style="width: 100%;" id="Q1O2" type="text" class="form-control" />
+														<div class="col-md-8 col-sm-8 col-xs-8" style="padding: 0">
+															<input style="width: 100%;" id="Q1O2" type="text" class="form-control formtext" />
 														</div>
 													</div>
 													<div class="col-md-2">
@@ -83,12 +83,12 @@
 										</div>
 									</div>
 								</div>
-								<div style="position:fixed; right:0px; top: 30%;" class="well col-md-2 col-sm-4 col-xs-4">
+								<div style="position:fixed; right:0px; top: 30%;border:7px solid #34495e;padding:10px;background-color:#EDEDED;"  class="col-md-2 col-sm-4 col-xs-4">
 									<div id="addO" class="addO btn btn-primary btn-block">
-										<img src='../images/notification_add.png' width="50" height="50" /> <b style="font-size: large;">Add Option</b>
+										<img src='../images/notification_add.png' width="50" height="50" /> <b style="font-size: 100%;">Add Option</b>
 									</div>
 									<div id="addQ" class="btn btn-primary btn-block">
-										<img src='../images/file_add.png' width="50" height="50" /> <b style="font-size: large;">Add Question</b>
+										<img src='../images/file_add.png' width="50" height="50" /> <b style="font-size: 100%;">Add Question</b>
 									</div>
 									<br />
 									<div id="sub" class="btn btn-block btn-success" style="font-size: large;">
@@ -222,12 +222,34 @@
 			$(this).closest('.row').remove();
 			Qoption[index]--;
 		});
-
+		
+		var toggleTextfieldColor = false;
+		var allFieldFull = true;
+		var questConstraint = true;
+		var optionConstraint = true;
+		var radioConstraint = true;
+		$('.questionField, #addQ, .addO').click(function(){
+			
+		if(toggleTextfieldColor === true)
+		{
+			$('.formtext').each(function() {
+				$(this).css({
+						"border": "",
+						"background": ""
+					});
+			});
+		}
+		
+		});
+		
 		$('#sub').click(function() {
 			var isValid = true;
-			$('input[type="text"]').each(function() {
+			alert(questionCount);
+			$('.formtext').each(function() {
 				if ($.trim($(this).val()) == '') {
 					isValid = false;
+					allFieldFull = false;
+					toggleTextfieldColor = true;
 					$(this).css({
 						"border": "1px solid red",
 						"background": "#FFCECE"
@@ -239,13 +261,20 @@
 						"background": ""
 					});
 				}
-				for (var i = 1; i < questionCount; i++) {
-					if (Qoption[i] > 6) {
-						isValid = false;
-					}
-				}
-
+			
 			});
+			for (var i = 1; i < questionCount; i++) {
+				if (Qoption[i] > 6) {
+			  		isValid = false;
+			  		optionConstraint = false;
+					}
+			}
+			if(questionCount>1)
+			{
+				alert("in here");
+				isValid = false;
+				questConstraint = false;
+			}
 			if (isValid != false) {
 				alert('true');
 				var getUrlParameter = function getUrlParameter(sParam) {
@@ -300,7 +329,7 @@
 
 				alert(getUrlParameter('id'));
 				$.ajax({
-					url: "/questions/ashi",
+					url: "https://rails-teach-vijayganesh7sankaran.c9users.io/questions/ashi",
 					type: "POST",
 					data: {
 						"quiz_id": quiz_id,
@@ -311,8 +340,8 @@
 					},
 					success: function(data) {
 						console.log(data + ' entered successfully');
-						alert('Quiz added successfully');
-						window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes';
+						swal('Quiz added successfully');
+					//	window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes';
 
 					}
 
@@ -321,14 +350,16 @@
 			}
 
 			else {
-				alert('Please enter all the fields');
-				if (questionCount < 5) {
-					alert('minimum question count must be 5');
+				if(allFieldFull === false && questConstraint === true && optionConstraint === true)
+				{
+				swal("Oops...", "Please enter all the fields", "error");
 				}
-				for (var i = 1; i <= questionCount; i++) {
-					if (Qoption[i] > 6) {
-						alert('options should not be more than 6');
-					}
+				else if (questConstraint === false) {
+					swal("Oops...", "There must be a minimum of five questions", "error");
+				}
+				else if(optionConstraint === false)
+				{
+					swal("Oops...", "Options must be between a count of 2 and 6", "error");	
 				}
 			}
 
@@ -337,3 +368,4 @@
 
 	});
 </script>
+

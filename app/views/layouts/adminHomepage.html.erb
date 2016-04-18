@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GamE-Learn | A fun way to learning</title>
     <!-- Bootstrap core CSS -->
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
     <link href="../dists/css/bootstrap.min.css" rel="stylesheet">
     <link href="../dists/fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="../dists/css/animate.min.css" rel="stylesheet">
@@ -16,8 +19,10 @@
     <link rel="stylesheet" type="text/css" href="../dists/css/maps/jquery-jvectormap-2.0.3.css" />
     <link href="../dists/css/icheck/flat/green.css" rel="stylesheet" />
     <link href="../dists/css/floatexamples.css" rel="stylesheet" type="text/css" />
+    <link href="../dists/css/sweetalert.css" rel="stylesheet" type="text/css" />
     <script src="../dists/js/jquery.min.js"></script>
     <script src="../dists/js/nprogress.js"></script>
+    <script src="../dists/js/sweetalert.min.js"></script>
     <!--[if lt IE 9]>
     <script src="../assets/js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
@@ -222,7 +227,7 @@
                             <h3>Social</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-puzzle-piece"></i> Quizzes <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-users"></i> My Community <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="#">My Friends</a>
@@ -246,7 +251,7 @@
                                             <a href="#">View all Quizzes</a>
                                         </li>
                                         <li>
-                                            <a href="#">Add a Quiz</a>
+                                            <a href="quizzes/new">Add a Quiz</a>
                                         </li>
                                         <li>
                                             <a href="#">Edit/Delete a Quiz</a>
@@ -268,9 +273,11 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
+                            <% if current_user %> 
+                                <%= link_to logout_path, method: "delete", :'data-toggle' => "tooltip", :'data-placement' => "top", :title => "Logout" do %>
+                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                <% end %>
+                            <% end %>
                     </div>
                     <!-- /menu footer buttons -->
                 </div>

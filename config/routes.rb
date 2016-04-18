@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-
+  root 'users#login'
 
   get 'options/new'
 
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'questions'=>'questions#new'
   
   post 'questions/ashi' => 'questions#ashi'
+  post 'questions/ashiupdate' => 'questions#ashiupdate'
+  post 'questions/ashidestroy' => 'questions#ashidestroy'
 
   post 'questions/create' => 'questions#create'
   get 'output' => 'questions#index'
@@ -28,8 +30,9 @@ Rails.application.routes.draw do
   get 'quiz' => 'quizzes#index'
 
   get 'admin' => 'quizzes#admin'
+  get 'user' => 'quizzes#user'
 
-  get 'signup' => 'users#new'
+  get 'signup' => 'users#login'
   get '/questions/index' => 'questions#index'
   resources :users
   resources :quizzes

@@ -1,61 +1,441 @@
-<!--div<%@question.each do |t| %>
-<ul>
-  <li><%=t.question%></li>
-    <ul>
-       <% i =0 %>
-       <% while i < @hash[t.id].length do %>
-      <li><%= @hash[t.id][i] %></li>
-      <% i+=1 %>
-      <% end  %>
-  </ul>
-</ul>
-<%end%>
-</div -->
-<div class="container">
-<%@question.each do |t| %>
-<div id="Quiz1" class="questionsField well">
-  <div id="questionText1" class="questionText">
-    Question:
-    <input type="text" id="Question1" class="form-control" value="<%= t.question %>" />
-    <br />
-  </div>
-  <div id="Quiz1options">
-    <% i =0 %>
-    <% while i < @hash[t.id].length do %>
-    <div class="row" style="margin:1em;">
-      <div class="col-md-10">
+<style>
+	.input-group-addon {
+		width: 0%;
+	}
+</style>
 
-        <span class="optionText">Option:</span>
-        <div class="input-group">
+<div class="">
+	<div class="page-title">
+		<div class="title_left">
+			<h3>Add Questions</h3>
+		</div>
+		<div class="title_right">
+			<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                  </span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>New Question <small> - please add a few questions &amp; options.</small></h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<br />
+					<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+						<div class="row">
+							<div style="margin-top:3em" class="col-md-8 col-sm-8 col-xs-8">
+								<div class="questionField">
+								  <% i =0 %>
+								  <%@question.each do |t| %>
+								
+								  <% k=0 %>
+									<br />
+									<div id="Quiz<%= i+1 %>" class="questionsField well">
+										<div id="questionText<%= i+1 %>" class="questionText">
+											<h2>Question:</h2>
+											<input type="text" id="Question<%= i+1 %>" value="<%= t.question %>" class="form-control formtext" />
+											<br /> <h2>Points:</h2>
+											<input style="width:10%" type="text" id="pts<%= i+1 %>" value="<%= t.point %>" class="form-control formtext" />
+											<br/>
+										</div>
+										<div id="Quiz<%= i+1 %>options">
+										  <% j=0 %>
+										  <% while k < @hash[t.id].length do %>
+											<div id="Quiz<%= i+1 %>Q<%= i+1 %>option<%= j+1 %>">
+												<div class="row">
+													<div class="col-md-10">
+														<span class="optionText col-md-4 col-sm-4 col-xs-4"><h2>Option <%= j+1 %>:</h2></span>
+														<div class="col-md-8 col-sm-8 col-xs-8" style="padding: 0">
+															<input style="width: 100%;" id="Q<%= i+1 %>O<%= j+1 %>" type="text" value ="<%= @hash[t.id][j] %>" class="form-control formtext" />
+														</div>
+													</div>
 
-          <input id="Q1O2" type="text" value="<%= @hash[t.id][i] %>" class="form-control" />
-          <span class="input-group-addon">
-										<span class="glyphicon glyphicon-trash"></span>
+													<div class="col-md-2">
+														<div class="radio">
+															<label>
+																<% if @radio[t.id][j] == true %>
+																<input type="radio" name="optradio<%= i+1 %>" value="<%= j+1 %>" checked />
+																<% else %>
+																<input type="radio" name="optradio<%= i+1 %>" value="<%= j+1 %>" />
+																<% end %>
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
 
-          </span>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div style="margin:1.2em" class="radio">
-          <label>
-            <input type="radio" name="optradio1">
-          </label>
-        </div>
-      </div>
-    </div>
-    <% i+=1 %>
-    <% end  %>
-  </div>
-</div>
-<% end %>						
-
-<br />
-<div class="well col-md-12">
+											<!--div id="Quiz1Q1option2">
+												<div class="row">
+													<div class="col-md-10">
+														<span class="optionText col-md-4 col-sm-4 col-xs-4"><h2>Option 2:</h2></span>
+														<div class="col-md-8 col-sm-8 col-xs-8" style="padding: 0">
+															<input style="width: 100%;" id="Q1O2" type="text" class="form-control formtext" />
+														</div>
+													</div>
+													<div class="col-md-2">
+														<div class="radio">
+															<label>
+																<input type="radio" name="optradio1" value="2">
+															</label>
+														</div>
+													</div>
+												</div>
+											</div-->
+										<% j+=1 %>
+										<% k+=1%>
+										<% end %>
+										</div>
+										
+									</div>
+									<% i+=1 %>
+									<% end %>
+								</div>
+								<div style="position:fixed; right:0px; top: 30%;" class="well col-md-2 col-sm-4 col-xs-4">
+									<div id="addO" class="addO btn btn-primary btn-block">
+										<img src='../images/notification_add.png' width="50" height="50" /> <b style="font-size: large;">Add Option</b>
+									</div>
+									<div id="addQ" class="btn btn-primary btn-block">
+										<img src='../images/file_add.png' width="50" height="50" /> <b style="font-size: large;">Add Question</b>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+	<div class="well col-md-8">
   <div class="row col-md-12">
-  <button class="btn btn-success col-md-3 col-md-offset-1">Make changes</button>
-  <button class="btn btn-danger col-md-3 col-md-offset-1">Delete Quiz</button>
-  <button class="btn btn-primary col-md-3 col-md-offset-1">Go back to quizzes</button>
+  <button id="makeC" class="btn btn-success col-md-2 col-md-offset-1">Make changes</button>
+  <button id ="makeD" class="btn btn-danger col-md-2 col-md-offset-1">Delete Quiz</button>
+  <button class="btn btn-primary col-md-2 col-md-offset-1">Go back to quizzes</button>
   </div>
 </div>
-
 </div>
+</div>
+
+
+
+
+
+
+
+<script>
+	$(document).ready(function() {
+		var quiz = 1;
+		var questionCount = <%= @question.length %>;
+		var optionCount = 1;
+		var optionNo = 2;
+		var questionNo = 1;
+		var toggleSelected;
+		var i = 0;
+		var Qoption = [];
+		
+		<% scriptq =0 %>
+		<% @question.each do |t| %>
+		
+		  Qoption[<%= scriptq %>] = <%= @hash[t.id].length %>
+		  <% scriptq+=1 %>
+		<% end %>
+		
+		swal("hello"+Qoption[2]);
+
+		$('#addQ').click(function() {
+
+			var optionSurr1 = $('#Quiz1Q1option1').clone();
+			optionSurr1.find('#Q1O1').attr('id', 'Q' + (questionCount + 1) + 'O1').attr('value','');
+			optionSurr1.find("input[name='optradio1']").attr('name', 'optradio' + (questionCount + 1));
+			var optionSurr2 = optionSurr1;
+			optionSurr1 = optionSurr1.html();
+
+			optionSurr2.find('#Q'+(questionCount+1)+'O1').attr('id', 'Q' + (questionCount + 1) + 'O2').attr('value','');
+			optionSurr2.find('h2').text('Option 2:');
+			optionSurr2.find("input[name='optradio"+(questionCount+1)+"']").attr('name', 'optradio' + (questionCount + 1));
+			optionSurr2 = optionSurr2.html();
+
+			var questionSurr = $('#questionText' + questionCount).clone();
+			questionSurr.find('#Question'+questionCount).val(' ');
+			questionSurr.find('#Question' + questionCount).attr('id', 'Question' + (questionCount + 1)).attr('value','');
+			questionSurr.find('#pts' + questionCount).attr('id', 'pts' + (questionCount + 1)).attr('value','');
+			var contSurr = '<div id="Quiz' + (questionCount + 1) + '" class="questionsField well"><div id="questionText' + (questionCount + 1) + '"">' + questionSurr.html() + '</div><div id="Quiz' + (questionCount + 1) + 'options">' + optionSurr1 + optionSurr2 + '</div>';
+			$(contSurr).find('#Question' + (questionCount)).attr('id', 'Question');
+			$('.questionField').append(contSurr)
+			questionCount++;
+
+		});
+		$(document).on('click', '.questionsField', function() {
+
+
+			if (toggleSelected != null) {
+				$('#' + toggleSelected).css('background-color', '#F5F5F5');
+				$(this).css('background-color', '#34495e');
+				toggleSelected = $(this).attr('id');
+			}
+			else {
+				toggleSelected = $(this).attr('id');
+				$(this).css('background-color', '#34495e');
+			}
+
+		});
+
+
+		$('#addO').click(function() {
+			var string = toggleSelected;
+			var index = string.charAt(toggleSelected.length - 1);
+			if (Qoption[index] === undefined) {
+				Qoption[index] = 3;
+			}
+			else {
+				Qoption[index]++;
+			}
+			var tobe = $('#Quiz1Q1option1').clone();
+			tobe.find('.optionText').children(0).text('Option ' + Qoption[index] + ':');
+			tobe.find('#Q1O1').attr('id', 'Q' + index + 'O' + Qoption[index]).attr('value','');
+			tobe.find('#Q' + index + 'O' + Qoption[index]).parent().addClass('input-group');
+			tobe.find('#Q' + index + 'O' + Qoption[index]).parent().append('<span class="del input-group-addon btn btn-danger" style="width: 40px; color: #fff;"><span class="glyphicon glyphicon-trash"></span></span>');
+			tobe.find("input[name='optradio1']").attr('name', 'optradio' + index).val(Qoption[index]).addClass('flat');
+			tobe = tobe.html();
+			$('#Quiz' + index + 'options').append(tobe);
+		});
+
+		$(document).on('click', '.del', function() {
+			var string = toggleSelected;
+			var index = string.charAt(toggleSelected.length - 1);
+			var string2 = $(this).parent().children(0).attr('id');
+			var toremove = string2.charAt(string2.length - 1);
+			alert(toremove);
+			var search = $(this).closest('#Quiz' + index + 'options');
+			toremove = parseInt(toremove);
+			if (toremove === 3) {
+				console.log('yes');
+				console.log(search);
+				if (search.find('#Q' + index + 'O' + (toremove + 1)).length === 0) {
+					console.log('no further');
+				}
+				else {
+					var iterator = toremove + 1;
+					while (search.find('#Q' + index + 'O' + iterator).length != 0) {
+						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').text('Option ' + (iterator - 1));
+						search.find('#Q' + index + 'O' + iterator).attr('id', 'Q' + index + 'O' + (iterator - 1));
+						iterator++;
+					}
+				}
+				console.log(search.find('#Q' + index + 'O' + (toremove + 1)));
+			}
+			else {
+				if (search.find('#Q' + index + 'O' + (toremove + 1)).length === 0) {
+					console.log(search.find('#Q1O2'));
+					console.log(search.find('#Q' + index + 'O' + (toremove + 1)));
+					console.log('no further1');
+				}
+				else {
+					console.log(search);
+					var iterator = toremove + 1;
+					while (search.find('#Q' + index + 'O' + iterator).length != 0) {
+						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').text('Option ' + (iterator - 1));
+						search.find('#Q' + index + 'O' + iterator).attr('id', 'Q' + index + 'O' + (iterator - 1));
+						iterator++;
+						console.log(iterator);
+
+					}
+				}
+			}
+			$(this).closest('.row').remove();
+			Qoption[index]--;
+		});
+		
+		var toggleTextfieldColor = false;
+		var allFieldFull = true;
+		var questConstraint = true;
+		var optionConstraint = true;
+		$('.questionField, #addQ, .addO').click(function(){
+			
+		if(toggleTextfieldColor === true)
+		{
+			$('.formtext').each(function() {
+				$(this).css({
+						"border": "",
+						"background": ""
+					});
+			});
+		}
+		
+		});
+		
+		$('#makeD').click(function(){
+			
+			
+			
+			var getUrlParameter = function getUrlParameter(sParam) {
+					var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+						sURLVariables = sPageURL.split('&'),
+						sParameterName,
+						i;
+
+					for (i = 0; i < sURLVariables.length; i++) {
+						sParameterName = sURLVariables[i].split('=');
+
+						if (sParameterName[0] === sParam) {
+							return sParameterName[1] === undefined ? true : sParameterName[1];
+						}
+					}
+				};
+				
+				var quiz_id = getUrlParameter('id');
+			
+			$.ajax({
+					url: "/questions/ashidestroy",
+					type: "POST",
+					data: {
+						"quiz_id": quiz_id,
+					},
+					success: function(data) {
+						console.log(data + ' entered successfully');
+						swal({
+ 							 title: "Successfull!",
+ 							 text: "Quiz <%= @quiz.quiz_name %> has been deleted successfully",
+  							 timer: 1000,
+ 							 showConfirmButton: false
+							});
+						window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes/';
+
+					}
+
+				});
+			
+		});
+		
+		
+		$('#makeC').click(function(){
+		  swal('clicked');
+		  var isValid = true;
+		  $('.formtext').each(function() {
+				if ($.trim($(this).val()) == '') {
+					isValid = false;
+					allFieldFull = false;
+					toggleTextfieldColor = true;
+					$(this).css({
+						"border": "1px solid red",
+						"background": "#FFCECE"
+					});
+				}
+				else {
+					$(this).css({
+						"border": "",
+						"background": ""
+					});
+				}
+			
+			});
+			for (var i = 1; i < questionCount; i++) {
+				if (Qoption[i] > 6) {
+			  		isValid = false;
+			  		optionConstraint = false;
+					}
+			}
+			if(questionCount<5)
+			{
+				alert("in here");
+				isValid = false;
+				questConstraint = false;
+			}
+			if (isValid != false) {
+				//alert('true');
+				var getUrlParameter = function getUrlParameter(sParam) {
+					var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+						sURLVariables = sPageURL.split('&'),
+						sParameterName,
+						i;
+
+					for (i = 0; i < sURLVariables.length; i++) {
+						sParameterName = sURLVariables[i].split('=');
+
+						if (sParameterName[0] === sParam) {
+							return sParameterName[1] === undefined ? true : sParameterName[1];
+						}
+					}
+				};
+				var Qarray = [];
+				var Oarray = [];
+				var Carray = [];
+				var Parray = [];
+				var quiz_id = getUrlParameter('id');
+				for (var k = 0; k < questionCount; k++) {
+					Qarray[k] = $('#Question' + (k + 1)).val();
+				}
+
+				for (var c = 0; c <= questionCount; c++) {
+					Carray[c + 1] = $("input[name='optradio" + (c + 1) + "']:checked").val();
+				}
+
+				for (var q = 0; q <= questionCount; q++) {
+					Parray[q + 1] = $("#pts" + (q + 1)).val();
+				}
+
+				for (var i = 1; i <= questionCount; i++) {
+					Oarray[i - 1] = new Array(10);
+
+					if (Qoption[i] === undefined || Qoption[i] === 2) {
+						for (var j = 1; j < 3; j++) {
+							Oarray[i - 1][j - 1] = $('#Q' + i + 'O' + j).val();
+						}
+					}
+					else {
+						for (var j = 1; j <= Qoption[i]; j++) {
+							Oarray[i - 1][j - 1] = $('#Q' + i + 'O' + j).val();
+
+						}
+					}
+				}
+				
+				$.ajax({
+					url: "/questions/ashiupdate",
+					type: "POST",
+					data: {
+						"quiz_id": quiz_id,
+						"question": Qarray,
+						"option": Oarray,
+						"coption": Carray,
+						"pts": Parray
+					},
+					success: function(data) {
+						console.log(data + ' entered successfully');
+						swal('Quiz updated successfully');
+						window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/questions/view?id='+quiz_id;
+
+					}
+
+				});
+				
+			}
+
+			else {
+				if(allFieldFull === false && questConstraint === true && optionConstraint === true)
+				{
+				swal("Oops...", "Please enter all the fields", "error");
+				}
+				else if (questConstraint === false) {
+					swal("Oops...", "There must be a minimum of five questions", "error");
+				}
+				else if(optionConstraint === false)
+				{
+					swal("Oops...", "Options must be between a count of 2 and 6", "error");	
+				}
+			}
+				
+			
+		});
+		
+	});
+</script>

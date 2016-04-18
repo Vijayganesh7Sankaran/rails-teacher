@@ -1,9 +1,16 @@
 class QuizzesController < ApplicationController
+
+  layout "adminHomepage"
+  before_filter :set_cache_buster, :require_user
   
-  layout 'homepage'
   def admin
     
   end
+  
+  def user
+    render layout: "userHomepage"
+  end
+  
   def index
     @adm = Quiz.all
   end
@@ -21,12 +28,16 @@ class QuizzesController < ApplicationController
       redirect_to :controller => 'questions',:action => 'new',:id => @admin_id
     end
   end
+  
   def show
     
   end
+  
   def update
+    
   end
 
   def destroy
+    
   end
 end
