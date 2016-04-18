@@ -47,8 +47,12 @@ development:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-#production:
-  #<<: *default
-  #database: teacher_production
-  #username: teacher
-  #password: <%= ENV['TEACHER_DATABASE_PASSWORD'] %>
+production:
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  database: d52cjrpu95v20m
+  username: kbdjagjkvvfxum
+  password: RHWrc0_-pjqRNeHY89qaeIM7n8
+  host: ec2-176-34-127-73.eu-west-1.compute.amazonaws.com
+  port: 5432
