@@ -7,7 +7,7 @@ def create
 	@user1=User.new(user_params)
 	if @user1.save
 		session[:user_id] = @user1.id
-		redirect_to '/gameview'
+		redirect_to '/user'
 	else 
 		redirect_to '/signup'
 	end
