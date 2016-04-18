@@ -136,7 +136,7 @@
 			var questionSurr = $('#questionText' + questionCount).clone();
 			questionSurr.find('#Question' + questionCount).attr('id', 'Question' + (questionCount + 1));
 			questionSurr.find('#pts' + questionCount).attr('id', 'pts' + (questionCount + 1));
-			var contSurr = '<div id="Quiz' + (questionCount + 1) + '" class="questionsField well"><div id="questionText' + (questionCount + 1) + '"">' + questionSurr.html() + '</div><div id="Quiz' + (questionCount + 1) + 'options">' + optionSurr1 + optionSurr2 + '</div>';
+			var contSurr = '<div id="Quiz' + (questionCount + 1) + '" class="questionsField well"><a href="javascript:void(0);" class="removeQ"><span class="glyphicon glyphicon-trash pull-right"></span></a><div id="questionText' + (questionCount + 1) + '"">' + questionSurr.html() + '</div><div id="Quiz' + (questionCount + 1) + 'options">' + optionSurr1 + optionSurr2 + '</div>';
 			$(contSurr).find('#Question' + (questionCount)).attr('id', 'Question');
 			$('.questionField').append(contSurr)
 			questionCount++;
@@ -175,6 +175,26 @@
 			tobe.find("input[name='optradio1']").attr('name', 'optradio' + index).val(Qoption[index]).addClass('flat');
 			tobe = tobe.html();
 			$('#Quiz' + index + 'options').append(tobe);
+		});
+		
+		$(document).on('mouseover','.removeQ',function(){
+			
+			$(this).css('color','red');
+		});
+		$(document).on('mouseout','.removeQ',function(){
+			
+			$(this).css('color','grey');
+		});
+		
+		$(document).on('click','.removeQ',function(){
+			
+			var parent = $(this).parent();
+			alert(parent.html());
+			var quesId = $(this).parent().attr('id');
+			alert(quesId);
+			//$(this).parent().remove();
+			//questionCount--;
+			
 		});
 
 		$(document).on('click', '.del', function() {

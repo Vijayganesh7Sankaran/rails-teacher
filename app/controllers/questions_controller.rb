@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
  # respond_to :js, :json, :html
- layout "dashboard"
+ layout "adminHomepage"
  
 def index
   @ques_id = params[:question_id]
