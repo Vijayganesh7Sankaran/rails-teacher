@@ -191,6 +191,7 @@
 			var parent = $(this).parent();
 			alert(parent.html());
 			var quesId = $(this).parent().attr('id');
+			quesId = parseInt(quesId.slice(-1));
 			alert(quesId);
 			//$(this).parent().remove();
 			//questionCount--;
