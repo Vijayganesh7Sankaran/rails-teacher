@@ -1,0 +1,53 @@
+<select id="cat" class="selectpicker" title="Choose Category">
+    <% myarr = Array.new(@quiz.length) %>
+    <%= @quiz.each do |t| %>
+            <% if !myarr.include? t.category_name %>
+            <%     myarr.push(t.category_name) %>
+            <option><%= t.category_name %></option>
+            <% end %>
+    <% end %>
+</select>
+
+<select id="level" class="selectpicker" title="Choose Level">
+  <option>Beginner</option>
+  <option>Intermediate</option>
+  <option>Advanced</option>
+</select>
+
+<div id="sub" class="btn btn-primary">Submit</div>
+
+<div id="result" style="margin-top:2em;" class="well">
+    
+</div>
+
+
+
+<script>
+    $(document).ready(function(){
+        
+       $('#sub').click(function(){
+           
+           alert($('#level').val()+' '+$('#cat').val());
+           
+           $.ajax({
+               
+               url:'/attempt/retrieve',
+               method:'GET',
+               data: {"level": $('#level').val(), "category": $('#cat').val()},
+               success: function(data){
+                   var rstr = data;
+                   var arr2 = rstr.split(' ');
+                   $('#result').html('');
+                   for(var i=0;i<arr2.length && i+2 <= arr2.length;i+=2)
+                   {
+                       $('#result').append('<button href="/attempt/view?id="'+arr2[i] +'class=btn btn-primary>'+arr2[i+1]+'</button>');
+                   }
+                console.log(arr2);
+                   
+               }
+               
+           });
+           
+       });
+    });
+</script>

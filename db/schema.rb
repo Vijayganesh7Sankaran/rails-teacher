@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405043756) do
+ActiveRecord::Schema.define(version: 20160418191505) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "badge_name", limit: 255
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(version: 20160405043756) do
   end
 
   add_index "badges", ["user_id"], name: "index_badges_on_user_id", using: :btree
+
+  create_table "characters", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "name",       limit: 255
+    t.integer  "coins",      limit: 4
+    t.integer  "exp",        limit: 4
+    t.integer  "attack",     limit: 4
+    t.integer  "defence",    limit: 4
+    t.integer  "health",     limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "characters", ["user_id"], name: "index_characters_on_user_id", using: :btree
 
   create_table "histories", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -42,6 +56,18 @@ ActiveRecord::Schema.define(version: 20160405043756) do
   end
 
   add_index "options", ["question_id"], name: "index_options_on_question_id", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "tot_points",   limit: 4
+    t.integer  "correct_ans",  limit: 4
+    t.integer  "wrong_ans",    limit: 4
+    t.integer  "attempt_quiz", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.integer  "quiz_id",    limit: 4

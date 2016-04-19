@@ -31,7 +31,10 @@ Rails.application.routes.draw do
 
   get 'admin' => 'quizzes#admin'
   get 'user' => 'quizzes#user'
-
+  
+  get  '/attempt/index' => 'attempt#index'
+  get '/attempt/retrieve' => 'attempt#retrieve1'
+  
   get 'signup' => 'users#login'
   get '/questions/index' => 'questions#index'
   resources :users

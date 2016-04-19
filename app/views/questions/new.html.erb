@@ -140,6 +140,11 @@
 			$(contSurr).find('#Question' + (questionCount)).attr('id', 'Question');
 			$('.questionField').append(contSurr)
 			questionCount++;
+			if(Qoption[questionCount] != undefined)
+			{
+				alert('yes');
+				Qoption[questionCount] = 2;
+			}
 
 		});
 		$(document).on('click', '.questionsField', function() {
@@ -189,10 +194,53 @@
 		$(document).on('click','.removeQ',function(){
 			
 			var parent = $(this).parent();
-			alert(parent.html());
 			var quesId = $(this).parent().attr('id');
 			quesId = parseInt(quesId.slice(-1));
 			alert(quesId);
+			if(quesId === questionCount)
+			{
+				alert('yes');
+				$(this).parent().remove();
+				questionCount--;
+				Qoption[quesId] = 2;
+				questionCount--;
+			}
+			else
+			{
+				var cont = parent.parent();
+				for(var i=quesId+1;i<=questionCount;i++)
+				{
+				
+					cont.find('#Quiz'+i).attr('id','Quiz'+(i-1));
+					cont.find('#questionText'+i).attr('id','questionText'+(i-1));
+					cont.find('#pts'+i).attr('id','pts'+(i-1));
+					cont.find('#Question'+i).attr('id','Question'+(i-1));
+					cont.find('#Quiz'+i+'options').attr('id','Quiz'+(i-1)+'options');
+					cont.find('input[name="optradio'+i+'"]').attr('name','optradio'+(i-1));
+					if(Qoption[i] === undefined)
+					{
+						for(var j=1;j<3;j++)
+						{
+							cont.find('#Q'+i+'O'+j).attr('id','Q'+(i-1)+'O'+j);	
+						}
+						
+						Qoption[i-1] = 2;
+						
+					}
+					else
+					{
+						for(var j=1;j<=Qoption[i];j++)
+						{
+							cont.find('#Q'+i+'O'+j).attr('id','Q'+(i-1)+'O'+j);
+						}
+						
+						Qoption[i-1] = Qoption[i];
+					}
+				}
+					console.log(Qoption);
+				$(this).parent().remove();
+				questionCount--;
+			}
 			//$(this).parent().remove();
 			//questionCount--;
 			
@@ -333,7 +381,7 @@
 				for (var i = 1; i <= questionCount; i++) {
 					Oarray[i - 1] = new Array(10);
 
-					if (Qoption[i] === undefined) {
+					if (Qoption[i] === undefined || Qoption[i] === 2) {
 						for (var j = 1; j < 3; j++) {
 							Oarray[i - 1][j - 1] = $('#Q' + i + 'O' + j).val();
 						}
