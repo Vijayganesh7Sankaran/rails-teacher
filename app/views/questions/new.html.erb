@@ -338,7 +338,7 @@
 			  		optionConstraint = false;
 					}
 			}
-			if(questionCount>1)
+			if(questionCount<2)
 			{
 				alert("in here");
 				isValid = false;
@@ -410,7 +410,7 @@
 					success: function(data) {
 						console.log(data + ' entered successfully');
 						swal('Quiz added successfully');
-					//	window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes';
+						window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes';
 
 					}
 
