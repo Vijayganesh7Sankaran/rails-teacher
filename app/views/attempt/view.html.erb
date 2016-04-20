@@ -1,13 +1,47 @@
 <h2>Hello there</h2>
+<div id="questions">
+</div>
+<div id="options">
+</div>
+<a id="next">
+    next
+</a>
+<script>
+$(document).ready(function(){
+   var Qarray = [];
+   var Qoption = [[],[]];
 <% i =0 %>
 <%@question.each do |t| %>
     <% k=0 %>
-    <%= t.question %>
+    Qarray.push("<%= t.question %>");
     <% j=0 %>
     <% while k < @hash[t.id].length do %>
-        <%= @hash[t.id][j] %>
+        Qoption[<%= i %>][<%= k %>] = "<%= @hash[t.id][j] %>";
         <% j+=1 %>
         <% k+=1%>
     <% end %>
 <% i+=1 %>
 <% end %>
+
+console.log(Qarray);
+console.log(Qoption);
+    var Qcount = 0;
+    $('#next').click(function(){
+        if(!(Qcount >= Qarray.length)){
+            $('#questions').html("");
+            $('#questions').html("<strong>Q " + (Qcount+1) + ":  </strong>" + Qarray[Qcount]);
+            $('#options').html("");
+            for(var i = 0; i < Qoption[Qcount].length; i++){
+                $('#options').append((i+1) + ".)  " + Qoption[Qcount][i] + "</br>");
+            }
+            Qcount += 1;
+        }
+        else{
+            $('#questions').html("");
+            $('#options').html("");
+            $('#questions').html("Thats all folks...!!!");
+        }
+        
+    });
+});
+</script>

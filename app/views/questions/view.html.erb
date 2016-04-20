@@ -181,12 +181,12 @@
 
 			if (toggleSelected != null) {
 				$('#' + toggleSelected).css('background-color', '#F5F5F5');
-				$(this).css('background-color', '#34495e');
+				$(this).css('background-color', '#2A3F54');
 				toggleSelected = $(this).attr('id');
 			}
 			else {
 				toggleSelected = $(this).attr('id');
-				$(this).css('background-color', '#34495e');
+				$(this).css('background-color', '#2A3F54');
 			}
 
 		});
@@ -402,7 +402,7 @@
 				}
 				
 				$.ajax({
-					url: "/questions/ashiupdate",
+					url: "/questions/update",
 					type: "POST",
 					data: {
 						"quiz_id": quiz_id,
@@ -411,10 +411,10 @@
 						"coption": Carray,
 						"pts": Parray
 					},
-					success: function(data) {
-						console.log(data + ' entered successfully');
+					success: function() {
+						console.log(' entered successfully');
 						swal('Quiz updated successfully');
-					//	window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/questions/view?id='+quiz_id;
+						//window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/questions/view?id='+quiz_id;
 
 					}
 

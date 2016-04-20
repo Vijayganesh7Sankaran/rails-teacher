@@ -1,17 +1,24 @@
 class QuestionsController < ApplicationController
  # respond_to :js, :json, :html
- layout "adminHomepage"
+ layout "adminHomepage", :except => [:update, :destroy, :ashidestroy, :show]
+ 
  
 def index
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  @user1 = User.find_by_id(@current_user.id)
   @ques_id = params[:question_id]
 end
   
 def new
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  @user1 = User.find_by_id(@current_user.id)
   @question=Question.new
   @quiz_id = params[:id]
 end
 
 def create
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  @user1 = User.find_by_id(@current_user.id)
   @question=Question.new(params.require(:question).permit(:question,:point))
  
   @id = params[:quiz_id]
@@ -26,6 +33,8 @@ def create
 end
 
 def view
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  @user1 = User.find_by_id(@current_user.id)
   @quiz = Quiz.find_by_id(params[:id])
   @question = @quiz.questions
 
@@ -46,7 +55,7 @@ end
   
 
 
-def ashi
+def show
   @quizze= Quiz.find_by_id(params[:quiz_id])
   @quest = params[:question]
   @option = params[:option]
@@ -77,7 +86,8 @@ def ashi
   end
 end
 
-def ashiupdate
+def update
+  
   @quizze= Quiz.find_by_id(params[:quiz_id])
   @quest = params[:question]
   @option = params[:option]
@@ -120,6 +130,7 @@ def ashiupdate
     j+=1
     i+=1
   end
+   
 end
 
 def destroy

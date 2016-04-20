@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get 'questions'=>'questions#new'
   
-  post 'questions/ashi' => 'questions#ashi'
+  post 'questions/show' => 'questions#show'
   post 'questions/ashiupdate' => 'questions#ashiupdate'
   post 'questions/ashidestroy' => 'questions#ashidestroy'
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   get 'questions/view'
 
-  get 'questions/update'
+  post 'questions/update'
 
   get 'questions/destroy'
   get 'users/profile_pic'
@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   get 'admin' => 'quizzes#admin'
   get 'user' => 'quizzes#user'
+  get 'games' => 'quizzes#games'
   
   get  '/attempt/index' => 'attempt#index'
   get '/attempt/retrieve' => 'attempt#retrieve1'
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
   get 'quiz_one' => 'game#game_one'
   get 'quizzes/destroy'
   get 'quizzes/update'
+  get 'quizzes' => 'quizzes#index'
  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

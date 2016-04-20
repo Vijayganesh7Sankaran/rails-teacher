@@ -153,7 +153,7 @@
                     <div class="profile">
                         <a href="">
                             <div class="profile_pic">
-                                <% if @user1.photo.url %>
+                                <% if @user1.photo.url != "/photos/original/missing.png" %>
                                     <%= image_tag @user1.photo.url , class: "img-circle profile_img"  %>
                                 <% elsif %>
                                     <img src="../dists/images/guest.png" alt="profile pic" class="img-circle profile_img">
@@ -195,26 +195,14 @@
                             <h3>My Activities</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="empty.html">
+                                    <a href="/user">
                                         <i class="fa fa-tachometer"></i>My Dashboard
                                     </a>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-gamepad"></i> My Games <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li>
-                                            <a href="#">The Chaostone</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Jig-Sawtron</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Captain Planet</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">ETales</a>
-                                        </li>
-                                    </ul>
+                                    <a href="/games">
+                                        <i class="fa fa-gamepad"></i> My Games</span>
+                                    </a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-line-chart"></i> My Stats <span class="fa fa-chevron-down"></span></a>
@@ -284,12 +272,16 @@
                         <ul class="nav navbar-nav navbar-right" style="position: fixed; right:20px;">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="../dists/images/profile-pic.jpg" alt="">
+                                    <% if @user1.photo.url != "/photos/original/missing.png" %>
+                                        <%= image_tag @user1.photo.url  %>
+                                    <% elsif %>
+                                        <img src="../dists/images/guest.png" alt="top nav profile pic">
+                                    <% end %>
                                     <% if @current_user %>
                                     <%= @current_user.first_name+" "+@current_user.last_name %>
-                                <% else %>
-                                <h2><%= "Guest" %></h2>
-                                <%end%>
+                                    <% else %>
+                                        <h2><%= "Guest" %></h2>
+                                    <%end%>
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
