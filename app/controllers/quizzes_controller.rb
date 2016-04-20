@@ -8,7 +8,12 @@ class QuizzesController < ApplicationController
   end
   
   def user
+    
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+	
+    @user1 = User.find_by_id(@current_user.id)
     render layout: "userHomepage"
+    #render plain:@user1.id
   end
   
   def index

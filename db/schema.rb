@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418191505) do
+ActiveRecord::Schema.define(version: 20160419120328) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "badge_name", limit: 255
@@ -89,13 +89,17 @@ ActiveRecord::Schema.define(version: 20160418191505) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name",      limit: 255
-    t.string   "last_name",       limit: 255
-    t.string   "email",           limit: 255
-    t.string   "role",            limit: 255
-    t.string   "password_digest", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "first_name",         limit: 255
+    t.string   "last_name",          limit: 255
+    t.string   "email",              limit: 255
+    t.string   "role",               limit: 255
+    t.string   "password_digest",    limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "photo_file_name",    limit: 255
+    t.string   "photo_content_type", limit: 255
+    t.integer  "photo_file_size",    limit: 4
+    t.datetime "photo_updated_at"
   end
 
 end

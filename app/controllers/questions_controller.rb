@@ -84,7 +84,7 @@ def ashiupdate
   @correct_opt = params[:coption]
   @points = params[:pts]
   i=0
-  j=1
+  j=0
   
   @questions = @quizze.questions
   
@@ -93,11 +93,11 @@ def ashiupdate
     t.update_attribute(:point,@points[j])
     
     @options= Option.where(:question_id => t.id)
-    k=1
+    k = 1
     l = 0
     @option[i.to_s].each do |o|
-        if l< @options.length
-          print j
+        if l < @options.length
+          #print j
             if @correct_opt[j] == k.to_s
               print "yes1"
               @options[l].update_attribute(:option, o)
@@ -105,11 +105,11 @@ def ashiupdate
             else
               @options[l].update_attribute(:option,o)
               @options[l].update_attribute(:correct, false)
-            l+=1
             end
+            l+=1
         else
             if @correct_opt[j] == k.to_s
-              print "yes"
+              #print "yes"
               Option.create(:option => o, :correct => true)
             else
               Option.create(:option => o, :correct => false)
@@ -117,8 +117,8 @@ def ashiupdate
         end
         k+=1
     end
-  j+=1
-  i+=1
+    j+=1
+    i+=1
   end
 end
 

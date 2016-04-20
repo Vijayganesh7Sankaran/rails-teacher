@@ -398,7 +398,7 @@
 
 				alert(getUrlParameter('id'));
 				$.ajax({
-					url: "https://rails-teach-vijayganesh7sankaran.c9users.io/questions/ashi",
+					url: "/questions/ashi",
 					type: "POST",
 					data: {
 						"quiz_id": quiz_id,
@@ -410,7 +410,7 @@
 					success: function(data) {
 						console.log(data + ' entered successfully');
 						swal('Quiz added successfully');
-						window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes';
+						window.location = '/quizzes';
 
 					}
 

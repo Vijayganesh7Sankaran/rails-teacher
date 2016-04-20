@@ -155,7 +155,11 @@
                     <div class="profile">
                         <a href="#">
                             <div class="profile_pic">
-                                <img src="../dists/images/profile-pic.jpg" alt="..." class="img-circle profile_img">
+                                <% if @user1.photo.url %>
+                                    <%= image_tag @user1.photo.url , class: "img-circle profile_img"  %>
+                                <% elsif %>
+                                    <img src="../dists/images/guest.png" alt="profile pic" class="img-circle profile_img">
+                                <% end %>
                             </div>
                         </a>
                         <div class="profile_info">
@@ -311,7 +315,11 @@
                                         <a href="javascript:;">Help</a>
                                     </li>
                                     <li>
-                                        <a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                            <% if current_user %> 
+                                <%= link_to logout_path, method: "delete", :title => "Logout" do %>
+                                    Log Out<i class="fa fa-sign-out pull-right"></i>
+                                <% end %>
+                            <% end %>
                                     </li>
                                 </ul>
                             </li>

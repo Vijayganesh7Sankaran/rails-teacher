@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   get 'questions/update'
 
   get 'questions/destroy'
-
+  get 'users/profile_pic'
+  put 'users/update'
   get 'quiz' => 'quizzes#index'
 
   get 'admin' => 'quizzes#admin'
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   
   get  '/attempt/index' => 'attempt#index'
   get '/attempt/retrieve' => 'attempt#retrieve1'
+  get 'attempt/view' => 'attempt#view'
   
   get 'signup' => 'users#login'
   get '/questions/index' => 'questions#index'

@@ -1,0 +1,13 @@
+<h2>Hello there</h2>
+<% i =0 %>
+<%@question.each do |t| %>
+    <% k=0 %>
+    <%= t.question %>
+    <% j=0 %>
+    <% while k < @hash[t.id].length do %>
+        <%= @hash[t.id][j] %>
+        <% j+=1 %>
+        <% k+=1%>
+    <% end %>
+<% i+=1 %>
+<% end %>

@@ -151,9 +151,15 @@
                     <div class="clearfix"></div>
                     <!-- menu prile quick info -->
                     <div class="profile">
-                        <a href="#">
+                        <a href="">
                             <div class="profile_pic">
-                                <img src="../dists/images/profile-pic.jpg" alt="..." class="img-circle profile_img">
+                                <% if @user1.photo.url %>
+                                    <%= image_tag @user1.photo.url , class: "img-circle profile_img"  %>
+                                <% elsif %>
+                                    <img src="../dists/images/guest.png" alt="profile pic" class="img-circle profile_img">
+                                <% end %>
+                               
+                               <!-- <img src="../dists/images/profile-pic.jpg" alt="..." class="img-circle profile_img">-->
                             </div>
                         </a>
                         <div class="profile_info">

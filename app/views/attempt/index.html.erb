@@ -40,7 +40,7 @@
                    $('#result').html('');
                    for(var i=0;i<arr2.length && i+2 <= arr2.length;i+=2)
                    {
-                       $('#result').append('<button href="/attempt/view?id="'+arr2[i] +'class=btn btn-primary>'+arr2[i+1]+'</button>');
+                       $('#result').append('<a href="/attempt/view?id='+arr2[i] +'" class="btn btn-primary">'+arr2[i+1]+'</a>');
                    }
                 console.log(arr2);
                    
