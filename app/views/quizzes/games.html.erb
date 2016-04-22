@@ -1,33 +1,258 @@
 <style>
   .btn-sq-lg {
-  width: 150px !important;
-  height: 150px !important;
-}
-
-.btn-sq {
-  width: 100px !important;
-  height: 100px !important;
-  font-size: 10px;
-}
-
-.btn-sq-sm {
-  width: 50px !important;
-  height: 50px !important;
-  font-size: 10px;
-}
-
-.btn-sq-xs {
-  width: 25px !important;
-  height: 25px !important;
-  padding:2px;
-}
-
+    width: 100% !important;
+    height: 150px !important;
+  }
+  
+  .btn-sq {
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 10px;
+  }
+  
+  .btn-sq-sm {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 10px;
+  }
+  
+  .btn-sq-xs {
+    width: 25px !important;
+    height: 25px !important;
+    padding: 2px;
+  }
+  
+  .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  .btn {
+    background-color: #73879C;
+    border: 1px solid black;
+    color: #dfdfdf;
+  }
+  .dropdown-menu.inner{
+    background-color: rgb(66, 85, 103);
+  }
+  .text{
+    color: #dfdfdf;
+  }
+  .text:hover{
+    color: black;
+  }
 </style>
 
 
 <div>
-    <a href="/attempt/index" class="btn btn-sq-lg btn-info">Captain Planet</a>
-    <a href="/attempt/index" class="btn btn-sq-lg btn-info">The chaostone</a>
-    <a href="/attempt/index" class="btn btn-sq-lg btn-info">Jig-Sawtron</a>
-    <a href="/attempt/index" class="btn btn-sq-lg btn-info">Etales</a>
-</div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-12" style="">
+        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position: absolute; top:60px;">
+            <select id="level" class="selectpicker" title="Choose Level">
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 120px;">
+            <select id="category_name" class="selectpicker" title="Choose Category">
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 180px;">
+            <select id="quiz_name" class="selectpicker" title="Choose Quiz">
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
+        <div class="row">
+          <div class="col-md-4" style="left: 10px; top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="73">
+              <span class="percent">73</span>
+            </span>
+            <div style="top: 250px;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="row tile_count">
+                  <div class="right">
+                    <div class="count_top">Kill Count</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" style="top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="100">
+              <span class="percent">73
+              </span>
+            </span>
+              <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+                <div class="animated flipInY tile_stats_count">
+                  <div class="right">
+                    <div class="count_top">Experience</div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+            <a href="/the_chaostone" class="btn btn-lg btn-block btn-success" style="top: 290px; width:80%; position: absolute; text-align: right; vertical-align: middle; background-color:#5cb85c;">
+            Start&nbsp;<span class="fa fa-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12" style="">
+        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="clearfix"></div>
+  <div class="row" style="margin-top: 450px;">
+    <div class="col-md-6">
+      <div class="col-md-12" style="">
+        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12" style="">
+        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
+      </div>
+    </div>
+  </div>
+  
+  <!--content end-->
+
+  <!--<div>-->
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-6">-->
+  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Captain Planet</a>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-6">-->
+  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">The chaostone</a>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-6">-->
+  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Jig-Sawtron</a>-->
+  <!--    </div>-->
+  <!--    <div class="col-md-6">-->
+  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Etales</a>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  
+  
+  
+  
+  
+  
+  
+  <script>
+    $(document).ready(function(){
+      $('#category_name').attr('disabled',true);
+      $('#quiz_name').attr('disabled',true);
+      
+      $.ajaxSetup({
+  					headers: {
+   						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  						}
+					});
+					
+					
+      $('#level').change(function(){
+        
+        //alert($(this).val());
+      
+					var clevel = $(this).val();
+					alert(clevel);
+					
+        $.ajax({
+          
+          url:'/quizzes/retrieve_category',
+          data: { "level": clevel },
+          type: 'GET',
+          success:function(data){
+            $('#category_name').html('');
+            for(var i=0;i<data.category.length;i++)
+            {
+              $('#category_name').append('<option>'+data.category[i]+'</option>');
+            }
+            
+            $('#category_name').attr('disabled', false);
+            $('#category_name').selectpicker('refresh');
+          }
+          
+        });
+        
+      });
+      
+      
+      $('#category_name').change(function(){
+        
+        var mCategory = $(this).val();
+        console.log(mCategory);
+        $.ajaxSetup({
+  					headers: {
+   						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  						}
+					});
+        
+        $.ajax({
+          
+          url:'/quizzes/retrieve_quiz',
+          data: { "category": mCategory },
+          type: 'GET',
+          success:function(data){
+            $('#quiz_name').html('');
+            for(var i=0;i<data.quiz_name.length;i++)
+            {
+              $('#quiz_name').append('<option>'+data.quiz_name[i]+'</option>');
+            }
+            
+            $('#quiz_name').attr('disabled', false);
+            $('#quiz_name').selectpicker('refresh');
+          }
+          
+        });
+        
+      });
+      
+    });
+  </script>

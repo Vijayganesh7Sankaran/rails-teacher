@@ -40,7 +40,7 @@
 											<h2>Question:</h2>
 											<input type="text" id="Question1" class="form-control formtext" />
 											<br /> <h2>Points:</h2>
-											<input style="width:10%" type="text" id="pts1" class="form-control formtext" />
+											<input style="width:10%" type="number" id="pts1" class="form-control formtext" />
 											<br/>
 										</div>
 										<div id="Quiz1options">
@@ -165,7 +165,10 @@
 
 		$('#addO').click(function() {
 			var string = toggleSelected;
-			var index = string.charAt(toggleSelected.length - 1);
+			var x = toggleSelected;
+    		var pos = x.lastIndexOf("z");
+    		var y = x.slice((x.lastIndexOf("z")+1),x.length);
+   		    var index = parseInt(y);
 			if (Qoption[index] === undefined) {
 				Qoption[index] = 3;
 			}
@@ -194,23 +197,25 @@
 		$(document).on('click','.removeQ',function(){
 			
 			var parent = $(this).parent();
-			var quesId = $(this).parent().attr('id');
-			quesId = parseInt(quesId.slice(-1));
-			alert(quesId);
+			var x = $(this).parent().attr('id');
+			var pos = x.lastIndexOf("z");
+    		var y = x.slice((x.lastIndexOf("z")+1),x.length);
+   		    var quesId = parseInt(y);
+			//quesId = parseInt(quesId.slice(-1));
+			alert(quesId+" "+questionCount);
 			if(quesId === questionCount)
 			{
 				alert('yes');
 				$(this).parent().remove();
 				questionCount--;
 				Qoption[quesId] = 2;
-				questionCount--;
 			}
 			else
 			{
 				var cont = parent.parent();
 				for(var i=quesId+1;i<=questionCount;i++)
 				{
-				
+					alert(i);
 					cont.find('#Quiz'+i).attr('id','Quiz'+(i-1));
 					cont.find('#questionText'+i).attr('id','questionText'+(i-1));
 					cont.find('#pts'+i).attr('id','pts'+(i-1));
@@ -248,9 +253,16 @@
 
 		$(document).on('click', '.del', function() {
 			var string = toggleSelected;
-			var index = string.charAt(toggleSelected.length - 1);
+			var x = $(this).closest('.questionsField').attr('id');
+    		var pos = x.lastIndexOf("z");
+    		var y = x.slice((x.lastIndexOf("z")+1),x.length);
+   		    var index = parseInt(y);
 			var string2 = $(this).parent().children(0).attr('id');
-			var toremove = string2.charAt(string2.length - 1);
+			var x = string2;
+    		var pos = x.lastIndexOf("O");
+    		var y = x.slice((x.lastIndexOf("O")+1),x.length);
+    		var toremove = parseInt(y);
+			//var toremove = string2.charAt(string2.length - 1);
 			alert(toremove);
 			var search = $(this).closest('#Quiz' + index + 'options');
 			toremove = parseInt(toremove);
@@ -263,7 +275,7 @@
 				else {
 					var iterator = toremove + 1;
 					while (search.find('#Q' + index + 'O' + iterator).length != 0) {
-						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').text('Option ' + (iterator - 1));
+						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').html('<h2>Option ' + (iterator - 1)+':</h2>');
 						search.find('#Q' + index + 'O' + iterator).attr('id', 'Q' + index + 'O' + (iterator - 1));
 						iterator++;
 					}
@@ -274,13 +286,14 @@
 				if (search.find('#Q' + index + 'O' + (toremove + 1)).length === 0) {
 					console.log(search.find('#Q1O2'));
 					console.log(search.find('#Q' + index + 'O' + (toremove + 1)));
+					console.log(index+" "+(toremove+1));
 					console.log('no further1');
 				}
 				else {
 					console.log(search);
 					var iterator = toremove + 1;
 					while (search.find('#Q' + index + 'O' + iterator).length != 0) {
-						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').text('Option ' + (iterator - 1));
+						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').html('<h2>Option ' + (iterator - 1)+':</h2>');
 						search.find('#Q' + index + 'O' + iterator).attr('id', 'Q' + index + 'O' + (iterator - 1));
 						iterator++;
 						console.log(iterator);
@@ -312,6 +325,7 @@
 		});
 		
 		$('#sub').click(function() {
+			
 			var isValid = true;
 			alert(questionCount);
 			$('.formtext').each(function() {
@@ -338,9 +352,20 @@
 			  		optionConstraint = false;
 					}
 			}
+			for(var i=0;i<questionCount;i++){
+				
+				
+				if($("input[name='optradio"+(i+1)+"']:checked").val() === undefined )
+				{
+					alert('radio not clicked');
+					radioConstraint = false;
+					isValid = false;
+				}
+				
+			}
 			if(questionCount<2)
 			{
-				alert("in here");
+			
 				isValid = false;
 				questConstraint = false;
 			}
@@ -397,6 +422,13 @@
 
 
 				alert(getUrlParameter('id'));
+				
+				$.ajaxSetup({
+  					headers: {
+   						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  						}
+					});
+				
 				$.ajax({
 					url: "/questions/show",
 					type: "POST",
@@ -410,7 +442,7 @@
 					success: function(data) {
 						console.log(data + ' entered successfully');
 						swal('Quiz added successfully');
-						window.location = '/quizzes';
+						//window.location = '/quizzes';
 
 					}
 
@@ -419,16 +451,21 @@
 			}
 
 			else {
-				if(allFieldFull === false && questConstraint === true && optionConstraint === true)
+				if(allFieldFull === false && questConstraint === true && optionConstraint === true && radioConstraint === true)
 				{
 				swal("Oops...", "Please enter all the fields", "error");
 				}
+				
 				else if (questConstraint === false) {
 					swal("Oops...", "There must be a minimum of five questions", "error");
 				}
 				else if(optionConstraint === false)
 				{
 					swal("Oops...", "Options must be between a count of 2 and 6", "error");	
+				}
+				else if(radioConstraint === false)
+				{
+					swal("Oops...", "Make sure a radio button for every question is selected", "error")
 				}
 			}
 

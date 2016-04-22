@@ -24,30 +24,26 @@
 
 <script>
     $(document).ready(function(){
-        
        $('#sub').click(function(){
-           
            alert($('#level').val()+' '+$('#cat').val());
-           
            $.ajax({
-               
                url:'/attempt/retrieve',
                method:'GET',
                data: {"level": $('#level').val(), "category": $('#cat').val()},
+               dataType: "json",
                success: function(data){
-                   var rstr = data;
-                   var arr2 = rstr.split(' ');
-                   $('#result').html('');
-                   for(var i=0;i<arr2.length && i+2 <= arr2.length;i+=2)
-                   {
-                       $('#result').append('<a href="/attempt/view?id='+arr2[i] +'" class="btn btn-primary">'+arr2[i+1]+'</a>');
-                   }
-                console.log(arr2);
-                   
+                //   var rstr = data;
+                //   var arr2 = rstr.split(' ');
+                //   $('#result').html('');
+                //   for(var i=0;i<arr2.length && i+2 <= arr2.length;i+=2)
+                //   {
+                //       $('#result').append('<a href="/attempt/view?id='+arr2[i] +'" class="btn btn-primary">'+arr2[i+1]+'</a>');
+                //   }
+                console.log(data);
+                alert(data.id+" "+data.quiz_name);
+                $('#result').append('<a href="/attempt/view?id='+data.id +'" class="btn btn-primary">'+data.quiz_name+'</a>');
                }
-               
            });
-           
        });
     });
 </script>

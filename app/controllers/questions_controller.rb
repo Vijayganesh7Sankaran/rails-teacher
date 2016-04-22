@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
  # respond_to :js, :json, :html
  layout "adminHomepage", :except => [:update, :destroy, :ashidestroy, :show]
+ before_filter :set_cache_buster, :require_user
  
  
 def index
@@ -120,9 +121,11 @@ def update
         else
             if @correct_opt[j] == k.to_s
               #print "yes"
-              Option.create(:option => o, :correct => true)
+              @tmp = Option.create(:option => o, :correct => true)
+              question.find(t.id).options << @tmp
             else
-              Option.create(:option => o, :correct => false)
+             @tmp =  Option.create(:option => o, :correct => false)
+             Question.find(t.id).options << @tmp
             end  
         end
         k+=1

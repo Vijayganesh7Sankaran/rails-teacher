@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root 'users#login'
+  root 'users#new'
 
   get 'options/new'
 
@@ -24,7 +24,10 @@ Rails.application.routes.draw do
   get 'questions/view'
 
   post 'questions/update'
-
+  
+  get '/quizzes/retrieve_category' => 'quizzes#retrieve_category'
+  get '/quizzes/retrieve_quiz' => 'quizzes#retrieve_quiz'
+  get '/the_chaostone' => 'game#thechaostone'
   get 'questions/destroy'
   get 'users/profile_pic'
   put 'users/update'
@@ -32,13 +35,14 @@ Rails.application.routes.draw do
 
   get 'admin' => 'quizzes#admin'
   get 'user' => 'quizzes#user'
-  get 'games' => 'quizzes#games'
+  get 'user_profile' => 'users#user_profile'
+  get '/games' => 'quizzes#games'
   
   get  '/attempt/index' => 'attempt#index'
   get '/attempt/retrieve' => 'attempt#retrieve1'
   get 'attempt/view' => 'attempt#view'
   
-  get 'signup' => 'users#login'
+  get 'signup' => 'users#new'
   get '/questions/index' => 'questions#index'
   resources :users
   resources :quizzes
@@ -47,6 +51,7 @@ Rails.application.routes.draw do
   resources :badges
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
+  post '/attempt/response' => 'attempt#quizresponse'
 
   delete 'logout' => 'sessions#destroy'
   get 'gameview' => 'game#view'
@@ -54,7 +59,7 @@ Rails.application.routes.draw do
   get 'quizzes/destroy'
   get 'quizzes/update'
   get 'quizzes' => 'quizzes#index'
- 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

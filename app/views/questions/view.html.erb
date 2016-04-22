@@ -149,31 +149,35 @@
 		  <% scriptq+=1 %>
 		<% end %>
 		
-		
+		console.log(Qoption);
 		
 		swal("hello"+Qoption[2]);
 
 		$('#addQ').click(function() {
 
 			var optionSurr1 = $('#Quiz1Q1option1').clone();
-			optionSurr1.find('#Q1O1').attr('id', 'Q' + (questionCount + 1) + 'O1').attr('value','');
+			optionSurr1.find('#Q1O1').attr('id', 'Q' + (questionCount + 1) + 'O1');
 			optionSurr1.find("input[name='optradio1']").attr('name', 'optradio' + (questionCount + 1));
-			var optionSurr2 = optionSurr1;
 			optionSurr1 = optionSurr1.html();
 
-			optionSurr2.find('#Q'+(questionCount+1)+'O1').attr('id', 'Q' + (questionCount + 1) + 'O2').attr('value','');
-			optionSurr2.find('h2').text('Option 2:');
-			optionSurr2.find("input[name='optradio"+(questionCount+1)+"']").attr('name', 'optradio' + (questionCount + 1));
+			var optionSurr2 = $('#Quiz1Q2option2').clone();
+			optionSurr2.find('#Q1O2').attr('id', 'Q' + (questionCount + 1) + 'O2');
+			optionSurr2.find("input[name='optradio1']").attr('name', 'optradio' + (questionCount + 1));
 			optionSurr2 = optionSurr2.html();
 
 			var questionSurr = $('#questionText' + questionCount).clone();
-			questionSurr.find('#Question'+questionCount).val(' ');
-			questionSurr.find('#Question' + questionCount).attr('id', 'Question' + (questionCount + 1)).attr('value','');
-			questionSurr.find('#pts' + questionCount).attr('id', 'pts' + (questionCount + 1)).attr('value','');
-			var contSurr = '<div id="Quiz' + (questionCount + 1) + '" class="questionsField well"><div id="questionText' + (questionCount + 1) + '"">' + questionSurr.html() + '</div><div id="Quiz' + (questionCount + 1) + 'options">' + optionSurr1 + optionSurr2 + '</div>';
+			questionSurr.find('#Question' + questionCount).attr('id', 'Question' + (questionCount + 1));
+			questionSurr.find('#pts' + questionCount).attr('id', 'pts' + (questionCount + 1));
+			var contSurr = '<div id="Quiz' + (questionCount + 1) + '" class="questionsField well"><a href="javascript:void(0);" class="removeQ"><span class="glyphicon glyphicon-trash pull-right"></span></a><div id="questionText' + (questionCount + 1) + '"">' + questionSurr.html() + '</div><div id="Quiz' + (questionCount + 1) + 'options">' + optionSurr1 + optionSurr2 + '</div>';
 			$(contSurr).find('#Question' + (questionCount)).attr('id', 'Question');
 			$('.questionField').append(contSurr)
 			questionCount++;
+			if(Qoption[questionCount] != undefined)
+			{
+				alert('yes');
+				Qoption[questionCount] = 2;
+			}
+
 
 		});
 		$(document).on('click', '.questionsField', function() {
@@ -193,29 +197,44 @@
 
 
 		$('#addO').click(function() {
+			
 			var string = toggleSelected;
-			var index = string.charAt(toggleSelected.length - 1);
-			if (Qoption[index] === undefined) {
-				Qoption[index] = 3;
+			var x = toggleSelected;
+    		var pos = x.lastIndexOf("z");
+    		var y = x.slice((x.lastIndexOf("z")+1),x.length);
+   		    var index = parseInt(y);
+   		    var qparam = index-1;
+   		    console.log(index+" "+Qoption[qparam]);
+			if (Qoption[qparam] === undefined) {
+				Qoption[qparam] = 3;
 			}
 			else {
-				Qoption[index]++;
+				Qoption[qparam]++;
 			}
 			var tobe = $('#Quiz1Q1option1').clone();
-			tobe.find('.optionText').children(0).text('Option ' + Qoption[index] + ':');
-			tobe.find('#Q1O1').attr('id', 'Q' + index + 'O' + Qoption[index]).attr('value','');
-			tobe.find('#Q' + index + 'O' + Qoption[index]).parent().addClass('input-group');
-			tobe.find('#Q' + index + 'O' + Qoption[index]).parent().append('<span class="del input-group-addon btn btn-danger" style="width: 40px; color: #fff;"><span class="glyphicon glyphicon-trash"></span></span>');
-			tobe.find("input[name='optradio1']").attr('name', 'optradio' + index).val(Qoption[index]).addClass('flat');
+			tobe.find('.optionText').children(0).text('Option ' + (Qoption[qparam]) + ':');
+			tobe.find('#Q1O1').attr('id', 'Q' + index + 'O' + (Qoption[qparam]));
+			tobe.find('#Q' + index + 'O' + (Qoption[qparam])).parent().addClass('input-group');
+			tobe.find('#Q' + index + 'O' + (Qoption[qparam])).parent().append('<span class="del input-group-addon btn btn-danger" style="width: 40px; color: #fff;"><span class="glyphicon glyphicon-trash"></span></span>');
+			tobe.find("input[name='optradio1']").attr('name', 'optradio' + index).val((Qoption[qparam])).addClass('flat');
 			tobe = tobe.html();
-			$('#Quiz' + index + 'options').append(tobe);
+			$('#Quiz' + index + 'options').append(tobe);console.log(questionCount+" "+(Qoption[qparam]));
+			console.log(Qoption);
+			
 		});
 
 		$(document).on('click', '.del', function() {
 			var string = toggleSelected;
-			var index = string.charAt(toggleSelected.length - 1);
+			var x = $(this).closest('.questionsField').attr('id');
+    		var pos = x.lastIndexOf("z");
+    		var y = x.slice((x.lastIndexOf("z")+1),x.length);
+   		    var index = parseInt(y);
 			var string2 = $(this).parent().children(0).attr('id');
-			var toremove = string2.charAt(string2.length - 1);
+			var x = string2;
+    		var pos = x.lastIndexOf("O");
+    		var y = x.slice((x.lastIndexOf("O")+1),x.length);
+    		var toremove = parseInt(y);
+			//var toremove = string2.charAt(string2.length - 1);
 			alert(toremove);
 			var search = $(this).closest('#Quiz' + index + 'options');
 			toremove = parseInt(toremove);
@@ -228,7 +247,7 @@
 				else {
 					var iterator = toremove + 1;
 					while (search.find('#Q' + index + 'O' + iterator).length != 0) {
-						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').text('Option ' + (iterator - 1));
+						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').html('<h2>Option ' + (iterator - 1)+':</h2>');
 						search.find('#Q' + index + 'O' + iterator).attr('id', 'Q' + index + 'O' + (iterator - 1));
 						iterator++;
 					}
@@ -239,13 +258,14 @@
 				if (search.find('#Q' + index + 'O' + (toremove + 1)).length === 0) {
 					console.log(search.find('#Q1O2'));
 					console.log(search.find('#Q' + index + 'O' + (toremove + 1)));
+					console.log(index+" "+(toremove+1));
 					console.log('no further1');
 				}
 				else {
 					console.log(search);
 					var iterator = toremove + 1;
 					while (search.find('#Q' + index + 'O' + iterator).length != 0) {
-						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').text('Option ' + (iterator - 1));
+						search.find('#Q' + index + 'O' + iterator).parent().parent().find('.optionText').html('<h2>Option ' + (iterator - 1)+':</h2>');
 						search.find('#Q' + index + 'O' + iterator).attr('id', 'Q' + index + 'O' + (iterator - 1));
 						iterator++;
 						console.log(iterator);
@@ -295,6 +315,12 @@
 				};
 				
 				var quiz_id = getUrlParameter('id');
+				
+			$.ajaxSetup({
+  					headers: {
+   						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  						}
+			});
 			
 			$.ajax({
 					url: "/questions/ashidestroy",
@@ -320,6 +346,7 @@
 		
 		
 		$('#makeC').click(function(){
+			console.log(Qoption);
 		  swal('clicked');
 		  var isValid = true;
 		  $('.formtext').each(function() {
@@ -389,6 +416,7 @@
 					Oarray[i] = new Array(10);
 
 					if (Qoption[i] === undefined || Qoption[i] === 2) {
+						console.log(i+" "+Qoption[i]);
 						for (var j = 0; j < 2; j++) {
 							Oarray[i][j] = $('#Q' + (i+1) + 'O' + (j+1)).val();
 						}
@@ -396,11 +424,19 @@
 					else {
 						for (var j = 0; j < Qoption[i]; j++) {
 							Oarray[i][j] = $('#Q' + (i+1) + 'O' + (j+1)).val();
-							//alert(Oarray[i][j]);
+							alert(Oarray[i][j]);
 						}
 					}
 				}
 				
+				
+				$.ajaxSetup({
+  					headers: {
+   						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  						}
+					});
+					
+					
 				$.ajax({
 					url: "/questions/update",
 					type: "POST",

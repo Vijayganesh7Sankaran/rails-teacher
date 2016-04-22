@@ -1,33 +1,64 @@
 class AttemptController < ApplicationController
     layout 'userHomepage'
+    before_filter :set_cache_buster, :require_user
     def index
         @quiz = Quiz.all
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
-        @user1 = User.find_by_id(@current_user.id)
+       
+        @user1 = User.find_by_id(current_user.id)
+    end
+    
+    
+    def quizresponse
+        @quiz = Quiz.find_by_id(params[:quiz_id])
+        @question = @quiz.questions
+        @question_id = @quiz.questions.first.id
+        @req_question = @quiz.questions.find((@question_id.to_i + (params[:question_id]).to_i))
+        @req_options = @req_question.options
+        @first_option = @req_options.first.id
+        if (@first_option + ((params[:option_id]).to_i)) == @req_options.find_by_correct(true).id
+            render plain:'true'
+        else
+            render plain:'false'
+        end
     end
     
     def retrieve1
         
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
-        @user1 = User.find_by_id(@current_user.id)
+       
+        @user1 = User.find_by_id(current_user.id)
         
         @category = params[:category]
         @level = params[:level]
         
         @require_quiz = Quiz.where(:category_name => @category, :level => @level)
-        namestr = String.new
-        @require_quiz.each do |f|
-            namestr<<f.id.to_s+' '+f.quiz_name+' '
-        end
-        render plain:namestr
+        
+        @jc = "[ \""
+        @j_id = "[ \""
+        l=0
+        @require_quiz.each do |r|
+            #@jc<<r.category_name
+            if !(l == (@require_quiz.length)-1)
+                @jc<<r.quiz_name+"\" , \""
+                @j_id<<r.id.to_s+"\" , \""
+            else
+                @jc<<r.quiz_name+"\" ]"
+                @j_id<<r.id.to_s+"\" ]"
+            end
+            l+=1
+        end 
+        
+        @my_json = "{ \"quiz_name\":" + @jc + ", \"id\":" + @j_id +" }"
+        
+        #render :json => @require_quiz.find_by_category_name('Bootstrap')
+        render :json => @my_json
         
     end
     
     
     def view
         
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
-        @user1 = User.find_by_id(@current_user.id)
+       
+        @user1 = User.find_by_id(current_user.id)
         
         @quiz = Quiz.find_by_id(params[:id])
         

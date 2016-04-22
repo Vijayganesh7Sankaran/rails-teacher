@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419120328) do
+ActiveRecord::Schema.define(version: 20160422041253) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "badge_name", limit: 255
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20160419120328) do
   end
 
   add_index "badges", ["user_id"], name: "index_badges_on_user_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "category_name", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "characters", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -80,13 +86,15 @@ ActiveRecord::Schema.define(version: 20160419120328) do
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
 
   create_table "quizzes", force: :cascade do |t|
-    t.string   "quiz_name",     limit: 255
-    t.string   "category_name", limit: 255
-    t.string   "level",         limit: 255
-    t.integer  "duration",      limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "quiz_name",   limit: 255
+    t.integer  "category_id", limit: 4
+    t.string   "level",       limit: 255
+    t.integer  "duration",    limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  add_index "quizzes", ["category_id"], name: "index_quizzes_on_category_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",         limit: 255

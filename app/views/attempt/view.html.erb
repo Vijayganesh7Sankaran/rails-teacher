@@ -1,40 +1,59 @@
 <h2>Hello there</h2>
 <div id="questions">
 </div>
-<div id="options">
-</div>
+
+<form class="form">
+	<label for="year" class="control-label input-group">Options</label>
+	<div class="btn-group" data-toggle="buttons">
+        <div id="options">
+        </div>
+    </div>
+</form>
+    <button id="show">Show</button>
+        
+        
 <a id="next">
     next
 </a>
 <script>
 $(document).ready(function(){
-   var Qarray = [];
-   var Qoption = [[],[]];
-<% i =0 %>
-<%@question.each do |t| %>
-    <% k=0 %>
-    Qarray.push("<%= t.question %>");
-    <% j=0 %>
-    <% while k < @hash[t.id].length do %>
-        Qoption[<%= i %>][<%= k %>] = "<%= @hash[t.id][j] %>";
-        <% j+=1 %>
-        <% k+=1%>
+    var Qarray = [];
+    var Qoption = [];
+    <% i=0 %>
+    <%@question.each do |t| %>
+        <% k=0 %>
+        Qarray.push("<%= t.question %>");
+        <% j=0 %>
+        <% while k < @hash[t.id].length do %>
+            if(!Qoption[<%= i %>]) 
+            {
+                Qoption[<%= i %>] = [];
+            }
+            Qoption[<%= i %>][<%= k %>] = "<%= @hash[t.id][j] %>";
+            <% j+=1 %>
+            <% k+=1%>
+        <% end %>
+    <% i+=1 %>
     <% end %>
-<% i+=1 %>
-<% end %>
 
-console.log(Qarray);
-console.log(Qoption);
+    console.log(Qarray);
+    console.log(Qoption);
     var Qcount = 0;
     $('#next').click(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        
+        $('#options').html("");
         if(!(Qcount >= Qarray.length)){
             $('#questions').html("");
             $('#questions').html("<strong>Q " + (Qcount+1) + ":  </strong>" + Qarray[Qcount]);
-            $('#options').html("");
             for(var i = 0; i < Qoption[Qcount].length; i++){
-                $('#options').append((i+1) + ".)  " + Qoption[Qcount][i] + "</br>");
+                $('#options').append("<label class=\"btn btn-default\"><input type=\"radio\" name=\"quiz\" id=\"option" + i + "\" value=\"" + i + "\">" + Qoption[Qcount][i] + " </label>");
             }
-            Qcount += 1;
+            
         }
         else{
             $('#questions').html("");
@@ -42,6 +61,45 @@ console.log(Qoption);
             $('#questions').html("Thats all folks...!!!");
         }
         
+        $('#show').click(function(){
+            var x = $('input[name=quiz]:checked').val();
+            console.log(x);
+            $.ajax({
+                url: "/attempt/response",
+                type: "POST",
+                data: {
+                    "quiz_id": <%= @quiz.id %>,
+                    "question_id": Qcount-1,
+                    "option_id": x
+                },
+                success: function(data) {
+                    console.log("The option you selected is " + data);
+                    if(data == "true"){
+                        swal({
+                            title: "Successfull :)",
+                            text: "The option you selected is " + data,
+                            showConfirmButton: false,
+                            timer: 1000,
+                            type: "success"
+                        });
+                    }
+                    else{
+                        swal({
+                            title: "Failed :(",
+                            text: "The option you selected is " + data,
+                            showConfirmButton: false,
+                            timer: 1000,
+                            type: "error"
+                        });
+                    }
+                    
+                    //window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes/';
+                }
+            });
+        });
+    
+
+        Qcount += 1;
     });
 });
 </script>
