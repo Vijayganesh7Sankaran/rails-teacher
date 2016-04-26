@@ -3,6 +3,8 @@ class CreateQuestions < ActiveRecord::Migration
     create_table :questions do |t|
       t.integer "quiz_id"
       t.string :question
+      t.string :imgurl
+      t.string :imgdesc
       t.integer :point
       t.timestamps null: false
     end

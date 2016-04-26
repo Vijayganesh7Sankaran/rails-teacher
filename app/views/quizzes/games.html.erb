@@ -29,18 +29,22 @@
   .btn {
     width: 100%;
   }
+  
   .btn {
     background-color: #73879C;
     border: 1px solid black;
     color: #dfdfdf;
   }
-  .dropdown-menu.inner{
+  
+  .dropdown-menu.inner {
     background-color: rgb(66, 85, 103);
   }
-  .text{
+  
+  .text {
     color: #dfdfdf;
   }
-  .text:hover{
+  
+  .text:hover {
     color: black;
   }
 </style>
@@ -57,7 +61,7 @@
         <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
         <div class="row">
           <div class="col-md-4 col-md-offset-8" style="position: absolute; top:60px;">
-            <select id="level" class="selectpicker" title="Choose Level">
+            <select id="stone" class="level selectpicker" title="Choose Level">
               <option>Beginner</option>
               <option>Intermediate</option>
               <option>Advanced</option>
@@ -66,13 +70,13 @@
         </div>
         <div class="row">
           <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 120px;">
-            <select id="category_name" class="selectpicker" title="Choose Category">
+            <select id="stonec" class="category_name selectpicker" title="Choose Category">
             </select>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 180px;">
-            <select id="quiz_name" class="selectpicker" title="Choose Quiz">
+            <select id="stoneq" class="quiz_name selectpicker" title="Choose Quiz">
             </select>
           </div>
         </div>
@@ -84,12 +88,10 @@
             <span class="chart" data-percent="73">
               <span class="percent">73</span>
             </span>
-            <div style="top: 250px;">
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
               <div class="animated flipInY tile_stats_count">
-                <div class="row tile_count">
-                  <div class="right">
-                    <div class="count_top">Kill Count</div>
-                  </div>
+                <div class="right">
+                  <div class="count_top">Kill Count</div>
                 </div>
               </div>
             </div>
@@ -99,156 +101,400 @@
               <span class="percent">73
               </span>
             </span>
-              <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
-                <div class="animated flipInY tile_stats_count">
-                  <div class="right">
-                    <div class="count_top">Experience</div>
-                  </div>
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="right">
+                  <div class="count_top">Experience</div>
                 </div>
               </div>
+            </div>
           </div>
           <div class="col-md-4">
-            <a href="/the_chaostone" class="btn btn-lg btn-block btn-success" style="top: 290px; width:80%; position: absolute; text-align: right; vertical-align: middle; background-color:#5cb85c;">
+            <a id="stonestart" href="/the_chaostone" class="btn btn-lg btn-block btn-success" style="top: 290px; width:80%; position: absolute; text-align: right; vertical-align: middle; background-color:#5cb85c;">
             Start&nbsp;<span class="fa fa-chevron-right"></span>
             </a>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="col-md-12" style="">
-        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
-      </div>
-      <div class="col-md-12" style="">
-        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
-      </div>
-      <div class="col-md-12" style="">
-        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
-      </div>
-    </div>
-  </div>
-  
-  
-  
-  
-  <div class="clearfix"></div>
-  <div class="row" style="margin-top: 450px;">
-    <div class="col-md-6">
-      <div class="col-md-12" style="">
-        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
-      </div>
-      <div class="col-md-12" style="">
-        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
-      </div>
-      <div class="col-md-12" style="">
-        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="col-md-12" style="">
-        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
-      </div>
-      <div class="col-md-12" style="">
-        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
-      </div>
-      <div class="col-md-12" style="">
-        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
-      </div>
-    </div>
-  </div>
-  
-  <!--content end-->
 
-  <!--<div>-->
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-6">-->
-  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Captain Planet</a>-->
-  <!--    </div>-->
-  <!--    <div class="col-md-6">-->
-  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">The chaostone</a>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-6">-->
-  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Jig-Sawtron</a>-->
-  <!--    </div>-->
-  <!--    <div class="col-md-6">-->
-  <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Etales</a>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
-  
-  
-  
-  
-  
-  
-  
-  <script>
-    $(document).ready(function(){
-      $('#category_name').attr('disabled',true);
-      $('#quiz_name').attr('disabled',true);
+    <!-------------------Captain Planet ------>
+
+    <div class="col-md-6">
+      <div class="col-md-12" style="">
+        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position: absolute; top:60px;">
+            <select id="cap" class="level selectpicker" title="Choose Level">
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 120px;">
+            <select id="capc" class="category_name selectpicker" title="Choose Category">
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 180px;">
+            <select id="capq" class="quiz_name selectpicker" title="Choose Quiz">
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
+        <div class="row">
+          <div class="col-md-4" style="left: 10px; top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="73">
+              <span class="percent">73</span>
+            </span>
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="right">
+                  <div class="count_top">Kill Count</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" style="top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="100">
+              <span class="percent">73
+              </span>
+            </span>
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="right">
+                  <div class="count_top">Experience</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <a href="/captain" id="capstart" class="btn btn-lg btn-block btn-success" style="top: 290px; width:80%; position: absolute; text-align: right; vertical-align: middle; background-color:#5cb85c;">
+            Start&nbsp;<span class="fa fa-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="row" style="margin-top: 450px;">
       
-      $.ajaxSetup({
-  					headers: {
-   						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-  						}
-					});
-					
-					
-      $('#level').change(function(){
-					var clevel = $(this).val();
-					
-        $.ajax({
-          
-          url:'/quizzes/retrieve_category',
-          data: { "level": clevel },
-          type: 'GET',
-          success:function(data){
-            $('#category_name').html('');
-            for(var i=0;i<data.category.length;i++)
-            {
-              $('#category_name').append('<option>'+data.category[i]+'</option>');
+      
+      <!-----------Jigsaw-Tron -->
+      <div class="col-md-6">
+      <div class="col-md-12" style="">
+        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position: absolute; top:60px;">
+            <select id="jig" class="level selectpicker" title="Choose Level">
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 120px;">
+            <select id="jigc" class="category_name selectpicker" title="Choose Category">
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 180px;">
+            <select id="jigq" class="quiz_name selectpicker" title="Choose Quiz">
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
+        <div class="row">
+          <div class="col-md-4" style="left: 10px; top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="73">
+              <span class="percent">73</span>
+            </span>
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="right">
+                  <div class="count_top">Kill Count</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" style="top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="100">
+              <span class="percent">73
+              </span>
+            </span>
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="right">
+                  <div class="count_top">Experience</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <a href="/captain" id="jigstart" class="btn btn-lg btn-block btn-success" style="top: 290px; width:80%; position: absolute; text-align: right; vertical-align: middle; background-color:#5cb85c;">
+            Start&nbsp;<span class="fa fa-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+      
+      
+      <!-----------Quote-game -->
+      <div class="col-md-6">
+      <div class="col-md-12" style="">
+        <img src="/images/gamepic.jpg" style="width: 100%; height: 400px;top: 0;left: 0; position: absolute;" class="img-responsive img-rounded">
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgSideFill.png" style="width: 50%; height: 260px;top: 0;right: 0; border-radius: 0 10px 0 0; position: absolute;">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position: absolute; top:60px;">
+            <select id="quote" class="level selectpicker" title="Choose Level">
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 120px;">
+            <select id="quotec" class="category_name selectpicker" title="Choose Category">
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8" style="position:absolute;top: 180px;">
+            <select id="quoteq" class="quiz_name selectpicker" title="Choose Quiz">
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="">
+        <img src="/dists/images/imgDownFill.png" style="width: 100%; height: 150px;top: 250px;left: 0; border-radius: 0 0 10px 10px; position: absolute;">
+        <div class="row">
+          <div class="col-md-4" style="left: 10px; top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="73">
+              <span class="percent">73</span>
+            </span>
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="right">
+                  <div class="count_top">Kill Count</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" style="top: 250px; vertical-align: middle;">
+            <span class="chart" data-percent="100">
+              <span class="percent">73
+              </span>
+            </span>
+            <div style="top: 250px; vertical-align: middle; word-wrap: break-word;">
+              <div class="animated flipInY tile_stats_count">
+                <div class="right">
+                  <div class="count_top">Experience</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <a href="/quotegamer" id="quotestart" class="btn btn-lg btn-block btn-success" style="top: 290px; width:80%; position: absolute; text-align: right; vertical-align: middle; background-color:#5cb85c;">
+            Start&nbsp;<span class="fa fa-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!--content end-->
+
+    <!--<div>-->
+    <!--  <div class="row">-->
+    <!--    <div class="col-md-6">-->
+    <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Captain Planet</a>-->
+    <!--    </div>-->
+    <!--    <div class="col-md-6">-->
+    <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">The chaostone</a>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--  <div class="row">-->
+    <!--    <div class="col-md-6">-->
+    <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Jig-Sawtron</a>-->
+    <!--    </div>-->
+    <!--    <div class="col-md-6">-->
+    <!--      <a href="/attempt/index" class="btn btn-sq-lg btn-block btn-info">Etales</a>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</div>-->
+
+<img src="..<%=@src%>"/>
+    <script>
+      $(document).ready(function() {
+        
+        if("<%=@src%>" != 0){
+        swal({   title: "Sweet!",   text: "Here's a custom image.",   imageUrl: "..<%=@src%>" });
+        }
+        $('#capc').attr('disabled', true);
+        $('#stonec').attr('disabled', true);
+        $('#jigc').attr('disabled', true);
+        $('#quotec').attr('disabled', true);
+        $('#capq').attr('disabled', true);
+        $('#stoneq').attr('disabled', true);
+        $('#jigq').attr('disabled', true);
+        $('#quoteq').attr('disabled', true);
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             }
-            
-            $('#category_name').attr('disabled', false);
-            $('#category_name').selectpicker('refresh');
-          }
-          
-        });
-        
-      });
-      
-      
-      $('#category_name').change(function(){
-        
-        var mCategory = $(this).val();
-        console.log(mCategory);
-        $.ajaxSetup({
-  					headers: {
-   						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-  						}
-					});
-        
-        $.ajax({
-          
-          url:'/quizzes/retrieve_quiz',
-          data: { "category": mCategory },
-          type: 'GET',
-          success:function(data){
-            $('#quiz_name').html('');
-            for(var i=0;i<data.quiz_name.length;i++)
-            {
-              $('#quiz_name').append('<option>'+data.quiz_name[i]+'</option>');
+          });
+        $('.level').change(function() {
+          var clevel = $(this).val();
+          var tid = $(this).attr('id');
+
+
+          $.ajax({
+
+            url: '/quizzes/retrieve_category',
+            data: {
+              "level": clevel
+            },
+            type: 'GET',
+            success: function(data) {
+              if (tid === 'cap') {
+
+                $('#capc').html('');
+                for (var i = 0; i < data.category.length; i++) {
+                  $('#capc').append('<option>' + data.category[i] + '</option>');
+                }
+
+                $('#capc').attr('disabled', false);
+                $('#capc').selectpicker('refresh');
+              }
+              else if (tid === 'stone') {
+                $('#stonec').html('');
+                for (var i = 0; i < data.category.length; i++) {
+                  $('#stonec').append('<option>' + data.category[i] + '</option>');
+                }
+
+                $('#stonec').attr('disabled', false);
+                $('#stonec').selectpicker('refresh');
+              }
+              else if(tid === 'jig')
+              {
+                 $('#jigc').html('');
+                for (var i = 0; i < data.category.length; i++) {
+                  $('#jigc').append('<option>' + data.category[i] + '</option>');
+                }
+
+                $('#jigc').attr('disabled', false);
+                $('#jigc').selectpicker('refresh');
+              }
+              else if(tid === 'quote')
+              {
+                 $('#quotec').html('');
+                for (var i = 0; i < data.category.length; i++) {
+                  $('#quotec').append('<option>' + data.category[i] + '</option>');
+                }
+
+                $('#quotec').attr('disabled', false);
+                $('#quotec').selectpicker('refresh');
+              }
+
             }
-            
-            $('#quiz_name').attr('disabled', false);
-            $('#quiz_name').selectpicker('refresh');
-          }
-          
+
+          });
+
         });
-        
+
+
+        $('.category_name').change(function() {
+
+          var mCategory = $(this).val();
+          var tid = $(this).attr('id');
+          console.log(mCategory);
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+
+          $.ajax({
+
+            url: '/quizzes/retrieve_quiz',
+            data: {
+              "category": mCategory
+            },
+            type: 'GET',
+            success: function(data) {
+              console.log(data);
+              if (tid === 'capc') {
+                $('#capq').html('');
+                for (var i = 0; i < data.quizzes.length; i++) {
+                  $('#capq').append('<option>' + data.quizzes[i].qn + '</option>');
+                  $('#capstart').attr('href', '/captain?id=' + data.quizzes[i].qid);
+                }
+
+                $('#capq').attr('disabled', false);
+                $('#capq').selectpicker('refresh');
+
+              }
+              else if (tid === 'stonec') {
+                $('#stoneq').html('');
+                for (var i = 0; i < data.quizzes.length; i++) {
+                  $('#stoneq').append('<option>' + data.quizzes[i].qn + '</option>');
+                  $('#stonestart').attr('href', '/the_chaostone?id=' + data.quizzes[i].qid);
+                }
+
+                $('#stoneq').attr('disabled', false);
+                $('#stoneq').selectpicker('refresh');
+              }
+              
+              else if(tid === 'jigc')
+              {
+                 $('#jigq').html('');
+                for (var i = 0; i < data.quizzes.length; i++) {
+                  $('#jigq').append('<option>' + data.quizzes[i].qn + '</option>');
+                  $('#jigstart').attr('href', '/jigsawtron?id=' + data.quizzes[i].qid);
+                }
+
+                $('#jigq').attr('disabled', false);
+                $('#jigq').selectpicker('refresh');
+              }
+              else if(tid === 'quotec')
+              {
+                 $('#quoteq').html('');
+                for (var i = 0; i < data.quizzes.length; i++) {
+                  $('#quoteq').append('<option>' + data.quizzes[i].qn + '</option>');
+                  $('#quotestart').attr('href', '/quotegamer?id=' + data.quizzes[i].qid);
+                }
+
+                $('#quoteq').attr('disabled', false);
+                $('#quoteq').selectpicker('refresh');
+              }
+
+            }
+          });
+
+        });
+
       });
-      
-    });
-  </script>
+    </script>

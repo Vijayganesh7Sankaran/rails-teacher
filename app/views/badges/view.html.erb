@@ -1,2 +1,10 @@
-<h1>Badges#view</h1>
-<p>Find me in app/views/badges/view.html.erb</p>
+<table border=1px solid black;>
+    <th> User Name</th>
+    <th> Total Points</th>
+    <%@leaderboard.each do |t|%>
+    <tr>
+        <td> <%=User.find(t.user_id).first_name%> <%=User.find(t.user_id).last_name%> </td>
+        <td><%=t.tot_points%></td>
+    </tr>
+    <%end%>
+</table>

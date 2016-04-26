@@ -1,0 +1,228 @@
+
+
+
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Gamification</h1>
+        <p>You Have Entered into the <b>Gamified Quiz </b></p>
+        <h3 id="headi"> Time Left <span id="time"></span> minutes! </h3>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6" style="background-color:invisible">
+      <img src="../images/quotegamer/firststarting_bear.gif" width=500px" height="400px" name="slide" />
+    </div>
+    <div class="clearfix visible-sm-block"></div>
+    <div class="col-md-6">
+        <div class="well" style="height:467px;width:396px;overflow:auto;">
+
+            <div id="right" class="test">
+                <h3 id="question" class="question"> </h3>
+                <div class="options">
+                </div>
+                <br />
+                <div id="endgame">
+                    <a class="btn btn-primary" id="next">
+                            next
+                        </a>
+                       
+                 
+                </div>
+                 <label for="quotes">Motivational Quotes:</label>
+                  <textarea class="form-control"  rows="5" id="quotetext" disabled > </textarea>      
+                
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<br>
+<br>
+<script>
+    //window.load();
+    $(document).ready(function() {
+        //   swal({
+        //                         title: "Instructions",
+        //                          text: "Welcome Captain Planet, Your task is to save the earth by answering correctly for all the questions.The more you make right, the more good world be revealed.Beware there is negative marking!!"
+        //                          showConfirmButton: true,
+
+
+        //                      });
+       
+       
+        <!-- $(this).bind("contextmenu", function(e) {-->
+        <!--    e.preventDefault();-->
+        <!-- });-->
+        <!-- document.onkeypress = function(event) {-->
+        <!--     event = (event || window.event);-->
+        <!--     if (event.keyCode == 123) {-->
+        <!--         return false;-->
+        <!--     }-->
+        <!-- }-->
+
+        <!-- document.onkeydown = function(event) {-->
+        <!--     event = (event || window.event);-->
+        <!--     if (event.keyCode == 123) {-->
+        <!--         return false;-->
+        <!--     }-->
+        <!--}-->
+        
+         start123();
+        var Qarray = [];
+        var Qoption = []; <% i = 0 %>
+            <% @question.each do |t | %>
+                <% k = 0 %>
+                Qarray.push("<%= t.question %>"); <%
+            j = 0 %>
+            <%
+            while k < @hash[t.id].length do %>
+                if (!Qoption[ <%= i %> ]) {
+                    Qoption[ <%= i %> ] = [];
+                }
+        Qoption[ <%= i %> ][ <%= k %> ] = "<%= @hash[t.id][j] %>"; <% j += 1 %>
+            <% k += 1 %>
+            <% end %>
+            <% i += 1 %>
+            <% end %>
+
+            console.log(Qarray);
+        console.log(Qoption);
+        var Qcount = 0;
+        $('#question').html("");
+        $('#question').html("<strong>Q " + (Qcount + 1) + ":  </strong>" + Qarray[Qcount]);
+        $('.options').html("");
+        for (var i = 0; i < Qoption[Qcount].length; i++) {
+            $('.options').append("<label class=\"btn btn-default\"><input type=\"radio\" name=\"quiz\" id=\"option" + i + "\" value=\"" + i + "\"><span style='margin-left:5px;'>" + Qoption[Qcount][i] + " </span></label>");
+        }
+        Qcount += 1;
+        $('#next').click(function() {
+
+            var x = $('input[name=quiz]:checked').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            console.log(x);
+            $.ajax({
+                url: "/attempt/response",
+                type: "POST",
+                data: {
+                    "quiz_id": <%= @quiz.id %> ,
+                    "question_id": Qcount - 1,
+                    "option_id": x
+                },
+                success: function(data) {
+                    console.log("The option you selected is " + data);
+                    $(window).trigger(jQuery.Event('keypress', {
+                        which: 13
+                    }));
+                    e = $.Event('keyup');
+                    e.keyCode = 39; // enter
+                    $('input').trigger(e);
+
+                    if (data == "true") {
+                        incrementRightPer(100 / ( <%= @question.length %> ));
+                        
+                        swal({
+                            title: "Successfull :)",
+                            text: "The option you selected is " + data,
+                            showConfirmButton: false,
+                            timer: 1000,
+                            type: "success"
+                        });
+                        swapImage();
+                        posQuote();
+                        
+
+                        $('#options').html("");
+                        if (!(Qcount >= Qarray.length)) {
+                            $('#question').html("");
+                            $('#question').html("<strong>Q " + (Qcount + 1) + ":  </strong>" + Qarray[Qcount]);
+                            $('.options').html("");
+                            for (var i = 0; i < Qoption[Qcount].length; i++) {
+                                $('.options').append("<label class=\"btn btn-default\"><input type=\"radio\" name=\"quiz\" id=\"option" + i + "\" value=\"" + i + "\"><span style='margin-left:5px;'>" + Qoption[Qcount][i] + " </span></label>");
+                            }
+
+                        }
+                        else {
+                            $('#endgame').append('<a id="qsub" class="btn btn-primary">Submit</a>');
+                        }
+
+                        Qcount += 1;
+                    }
+                    else {
+                        rightper = 100 / ( <%= @question.length %> );
+                        incrementLeftPer(rightper - 10);
+            
+                        swal({
+                            title: "Failed :(",
+                            text: "The option you selected is " + data,
+                            showConfirmButton: false,
+                            timer: 1000,
+                            type: "error"
+                        });
+                        negQuote();
+                        $('#options').html("");
+                        if (!(Qcount >= Qarray.length)) {
+                            $('#question').html("");
+                            $('#question').html("<strong>Q " + (Qcount + 1) + ":  </strong>" + Qarray[Qcount]);
+                            $('.options').html("");
+                            for (var i = 0; i < Qoption[Qcount].length; i++) {
+                                $('.options').append("<label class=\"btn btn-default\"><input type=\"radio\" name=\"quiz\" id=\"option" + i + "\" value=\"" + i + "\"><span style='margin-left:5px;'>" + Qoption[Qcount][i] + " </span></label>");
+                            }
+
+                        }
+                        else {
+                            $('#endgame').append('<a id="qsub" class="btn btn-primary">Submit</a>');
+                        }
+                        Qcount += 1;
+                    }
+
+                    //window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes/';
+                }
+            });
+
+
+        });
+
+        $(document).on('click', '#qsub', function() {
+
+            $.ajax({
+                url: "/submit",
+                type: "POST",
+                success: function(data) {
+                    console.log('happens');
+                    window.location ="/games";
+                }
+
+            });
+        });
+
+
+    });
+</script>
+           
+<br>
+<br>
+
+
+	
+
+<footer class="container-fluid text-center">
+  <p>You Are In The Gamified Platform</p>
+</footer>
+
+
+</body>
+</html>

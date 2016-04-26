@@ -151,7 +151,7 @@
 		
 		console.log(Qoption);
 		
-		swal("hello"+Qoption[2]);
+		//swal("hello"+Qoption[2]);
 
 		$('#addQ').click(function() {
 
@@ -160,11 +160,12 @@
 			optionSurr1.find("input[name='optradio1']").attr('name', 'optradio' + (questionCount + 1));
 			optionSurr1 = optionSurr1.html();
 
-			var optionSurr2 = $('#Quiz1Q2option2').clone();
+			var optionSurr2 = $('#Quiz1Q1option2').clone();
+			//alert(optionSurr2.html());
 			optionSurr2.find('#Q1O2').attr('id', 'Q' + (questionCount + 1) + 'O2');
 			optionSurr2.find("input[name='optradio1']").attr('name', 'optradio' + (questionCount + 1));
 			optionSurr2 = optionSurr2.html();
-
+			
 			var questionSurr = $('#questionText' + questionCount).clone();
 			questionSurr.find('#Question' + questionCount).attr('id', 'Question' + (questionCount + 1));
 			questionSurr.find('#pts' + questionCount).attr('id', 'pts' + (questionCount + 1));
@@ -347,7 +348,6 @@
 		
 		$('#makeC').click(function(){
 			console.log(Qoption);
-		  swal('clicked');
 		  var isValid = true;
 		  $('.formtext').each(function() {
 				if ($.trim($(this).val()) == '') {

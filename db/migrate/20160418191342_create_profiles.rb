@@ -8,6 +8,6 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer "attempt_quiz"
       t.timestamps null: false
     end
-    add_index :profiles , :user_id
+    add_index :profiles , :user_id, unique:true
   end
 end

@@ -7,6 +7,65 @@ class AttemptController < ApplicationController
         @user1 = User.find_by_id(current_user.id)
     end
     
+    def submitresponse
+        @myid = current_user.id
+        @find = Profile.find_by_user_id(@myid)
+        
+        #update attempt quiz
+        if  @find
+            @aq = @find.attempt_quiz
+            if @aq.to_i.zero?
+                @find.update_attributes(:attempt_quiz => 1)
+            else
+                @aq = @aq+1
+                @find.update_attributes(:attempt_quiz => @aq)
+                
+            end
+        end
+        
+        #insert into badges table
+        
+        if @find
+            @points = @find.tot_points
+            if  @points <= 100 
+                @ubadge = Ubadge.find_by_badge_name('Beginner')
+                @badge_check = Badge.where(:user_id => @find.user_id, :ubadge_id => @ubadge.id).size
+                if @badge_check == 0
+                Badge.create(:ubadge_id =>@ubadge.id,:user_id => @find.user_id)
+                @@badge_beg = @ubadge.url
+                end
+            elsif @points > 100 && @points <= 200
+            
+             @ubadge = Ubadge.find_by_badge_name('Average')
+                @badge_check = Badge.where(:user_id => @find.user_id, :ubadge_id => @ubadge.id).size
+                if @badge_check == 0
+                Badge.create(:ubadge_id =>@ubadge.id,:user_id => @find.user_id)
+                 @@badge_beg = @ubadge.url
+                end
+            elsif @points > 200
+                @ubadge = Ubadge.find_by_badge_name('Genius')
+                @badge_check = Badge.where(:user_id => @find.user_id, :ubadge_id => @ubadge.id).size
+                if @badge_check == 0
+                Badge.create(:ubadge_id =>@ubadge.id,:user_id => @find.user_id)
+                 @@badge_beg = @ubadge.url
+                end
+            end
+        end
+                
+        
+        #badge retrieval
+        
+        if current_user
+             @badge = Badge.where(:user_id => current_user.id)
+            @badge.each do |t|
+                
+                
+            end
+        end
+        #redirect_to '/games'
+        render :layout => false
+    end
+    
     
     def quizresponse
         @quiz = Quiz.find_by_id(params[:quiz_id])
@@ -16,8 +75,42 @@ class AttemptController < ApplicationController
         @req_options = @req_question.options
         @first_option = @req_options.first.id
         if (@first_option + ((params[:option_id]).to_i)) == @req_options.find_by_correct(true).id
+            @myid = current_user.id
+            @pts = 2
+            @cans =1
+            @find = Profile.find_by_user_id(@myid)
+            if  @find
+                @tpts = @find.tot_points
+                @tpts = @pts + @tpts
+                @tcans = @find.correct_ans
+                if @tcans != nil
+                    @tcans = @tcans + 1
+                else
+                    @tcans = 1
+                end
+                @find.update_attributes(:tot_points => @tpts, :correct_ans => @tcans)
+            else
+                Profile.create(:user_id => @myid, :tot_points => @pts, :correct_ans => @cans)
+            end
             render plain:'true'
         else
+            @myid = current_user.id
+            @pts = 2
+            @wans =1
+            @find = Profile.find_by_user_id(@myid)
+            if @find
+                @tpts = @find.tot_points
+                @tpts = @pts + @tpts
+                @twans = @find.wrong_ans
+                if @twans != nil
+                    @twans = @twans + @wans
+                else
+                    @twans = 1
+                end
+                @find.update_attributes(:tot_points => @tpts, :wrong_ans => @twans)
+            else
+                Profile.create(:user_id => @myid, :tot_points => @pts, :wrong_ans => @wans)
+            end
             render plain:'false'
         end
     end

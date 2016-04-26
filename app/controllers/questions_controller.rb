@@ -62,12 +62,18 @@ def show
   @option = params[:option]
   @correct_opt = params[:coption]
   @points = params[:pts]
+  @imgurl = params[:imgurl]
+  @imgdesc = params[:imgdesc]
   print @correct_opt
   print @points
   i=0
   j=1
   @quest.each do |equestion|
-    @question = Question.new(:question => equestion,:point => @points[j])
+    if @imgurl && @imgdesc
+      @question = Question.new(:question => equestion,:point => @points[j],:imgurl => @imgurl[j], :imgdesc => @imgdesc[j])
+    else
+      @question = Question.new(:question => equestion,:point => @points[j])
+    end
     if @question.save
       @quizze.questions << @question
       k=1
@@ -98,27 +104,29 @@ def update
   j=0
   
   @questions = @quizze.questions
-  
-  @questions.each do |t|
-    t.update_attribute(:question,@quest[i])
-    t.update_attribute(:point,@points[j])
-    
-    @options= Option.where(:question_id => t.id)
-    k = 1
-    l = 0
-    @option[i.to_s].each do |o|
-        if l < @options.length
-          #print j
-            if @correct_opt[j] == k.to_s
-              print "yes1"
-              @options[l].update_attribute(:option, o)
-              @options[l].update_attribute(:correct, true)
-            else
-              @options[l].update_attribute(:option,o)
-              @options[l].update_attribute(:correct, false)
-            end
-            l+=1
-        else
+  print @questions.length.to_s+"  "+@quest.length.to_s
+  if  (@quest.length - @questions.length) < 1 
+    print 'in the if '
+      @questions.each do |t|
+        t.update_attribute(:question,@quest[i])
+        t.update_attribute(:point,@points[j])
+        
+        @options= Option.where(:question_id => t.id)
+        k = 1
+        l = 0
+        @option[i.to_s].each do |o|
+            if l < @options.length
+                #print j
+                  if @correct_opt[j] == k.to_s
+                    print "yes1"
+                    @options[l].update_attribute(:option, o)
+                    @options[l].update_attribute(:correct, true)
+                  else
+                    @options[l].update_attribute(:option,o)
+                     @options[l].update_attribute(:correct, false)
+                  end
+                 l+=1
+           else
             if @correct_opt[j] == k.to_s
               #print "yes"
               @tmp = Option.create(:option => o, :correct => true)
@@ -132,6 +140,32 @@ def update
     end
     j+=1
     i+=1
+    
+  end
+  else
+    myl = @questions.length
+    print " "+@questions.length.to_s+" "+@quest.length.to_s
+    while (@quest.length-myl) != 0 do 
+      print 'in the loop1'
+       @question = Question.new(:question => @quest[myl1+1],:point => @points[myl+1])
+       if @question.save
+          @quizze.questions << @question
+          k=1
+          @option[(myl+1).to_s].each do |t|
+            if @correct_opt[myl+1] == k.to_s
+               print "yes"
+              @opt = Option.create(:option => t, :correct => true)
+            else
+               @opt = Option.create(:option => t, :correct => false)
+            end
+          @question.options << @opt
+          k+=1
+        end
+      end
+      myl+=1  
+    end
+    #render plain:'in the loop'
+    
   end
    
 end

@@ -1,0 +1,275 @@
+<style>
+@media(max-width:767px){}
+@media(min-width:768px){}
+@media(min-width:992px){}
+@media(min-width:1200px){
+	.mypanel{
+		width:550px;
+	}
+}
+.desc { 
+   position: absolute; 
+   top: 30%; 
+   left:10%; 
+   width: 80%; 
+}
+.desc span { 
+   color: white; 
+   font: bold 24px/45px Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 10px; 
+}
+.mypanel{
+  display:table;
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; 
+}
+</style>
+
+
+<div id="group">
+    <div id="cont" class="row col-lg-12" style="border:1px solid red">
+        <div class="mypanel panel col-md-6" style="border:1px solid black;display: inline-block;padding:2%;margin:1em;">
+            <img id="myimg" src=" <%= @question[0].imgurl %>" style="position:relative;width:100%" />
+            <h2 class="desc" id="idesc" style="display:none"><span> <%= @question[0].imgdesc %></span></h2>
+        </div>
+        <div class="well col-md-5 col-md-offset-1 quest" style="margin-left:1em;margin-top:1em;padding:5%">
+            <div id="question">
+                <h2> <%= @question[0].question %></h2> </div>
+            <br />
+            <div class="options">
+
+            </div>
+            <br />
+            <br />
+            <a id="next" class="btn btn-primary">Next</a>
+        </div>
+
+    </div>
+    <div class="row">
+        <div id="click" class="btn btn-primary col-md-offset-6">Click Me </div>
+    </div>
+</div>
+
+
+<!--div id="click" class="btn btn-primary col-md-offset-6">Click Me </div><br /-->
+
+<script src="../dists/js/jigsaw/jquery.image-jigsaw.js"></script>
+<script>
+    $(document).ready(function() {
+        
+        var Qarray = [];
+        var imgurl = [];
+        var imgdesc = [];
+        var Qoption = []; <% i = 0 %>
+            <% @question.each do |t | %>
+                <% k = 0 %>
+                Qarray.push("<%= t.question %>"); 
+                imgurl.push("<%= t.imgurl %>");
+                imgdesc.push("<%= t.imgdesc %>");
+                <% j = 0 %>
+            <% while k < @hash[t.id].length do %>
+                if (!Qoption[ <%= i %> ]) {
+                    Qoption[ <%= i %> ] = [];
+                }
+            Qoption[ <%= i %> ][ <%= k %> ] = "<%= @hash[t.id][j] %>"; <% j += 1 %>
+            <% k += 1 %>
+            <% end %>
+            <% i += 1 %>
+            <% end %>
+            
+         var Qcount = 0;
+        $('#question').html("");
+        $('#question').html("<strong>Q " + (Qcount + 1) + ":  </strong>" + Qarray[Qcount]);
+        $('#myimg').attr('src',imgurl[Qcount]);
+        $('#idesc').children(0).text(imgdesc[Qcount]);
+        $('.options').html("");
+        for (var i = 0; i < Qoption[Qcount].length; i++) {
+            $('.options').append("<label class=\"btn btn-default\"><input type=\"radio\" name=\"quiz\" id=\"option" + i + "\" value=\"" + i + "\"><span style='margin-left:5px;'>" + Qoption[Qcount][i] + " </span></label><br />");
+        }
+        Qcount += 1;
+        
+        
+        
+        
+        $(".panel").jigsaw({
+            freq: 1000,
+            x: 4,
+            y: 4,
+            margin: 2,
+            callbacks: [{
+                event: 'mouseover',
+                func: function() {
+                    $(this).data('last_bg', $(this).css('background-image'));
+                    $(this).css('background-image', 'none');
+                }
+            }, {
+                event: 'mouseout',
+                func: function() {
+                    $(this).css('background-image', $(this).data('last_bg'));
+                }
+            }]
+        });
+
+        $('#click').click(function() {
+
+            var test = $('node').plugin();
+            test.helloWorld();
+
+            $("#cont").hide().fadeIn(1000, function() {
+                $('.quest').fadeOut(1000);
+                $('.panel').animate({
+                    left: "23%"
+                }, 1000, function() {
+                    $('h2').fadeIn(1000);
+
+                });
+            });
+
+        });
+        
+        
+        
+        $('#next').click(function() {
+
+            var x = $('input[name=quiz]:checked').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            console.log(x);
+            $.ajax({
+                url: "/attempt/response",
+                type: "POST",
+                data: {
+                    "quiz_id": <%= @quiz.id %> ,
+                    "question_id": Qcount - 1,
+                    "option_id": x
+                },
+                success: function(data) {
+                    if (data == "true") {
+                        
+                        swal({
+                            title: "Correct :)",
+                            text: "The option you selected is " + data,
+                            showConfirmButton: false,
+                            timer: 1000,
+                            type: "success"
+                        });
+                        
+                        var duplicate = $('#group').clone();
+                        var test = $('node').plugin();
+                        test.helloWorld();
+                        $("#cont").hide().fadeIn(1000, function() {
+                            $('.quest').fadeOut(1000);
+                            $('.panel').animate({
+                                left: "23%"
+                            }, 1000, function() {
+                                $('h2').fadeIn(1000);
+            
+                            });
+                        });         
+                        
+                        
+                        setTimeout(rearrange, 5000);
+                        
+                    }
+                    else {
+                         var test = $('node').plugin();
+                        test.helloWorld();
+            
+                        $("#cont").hide().fadeIn(1000, function() {
+                            $('.quest').fadeOut(1000);
+                            $('.panel').animate({
+                                left: "23%"
+                            }, 1000, function() {
+                                $('h2').fadeIn(1000);
+            
+                            });
+                        });
+                        swal({
+                            title: "Failed :(",
+                            text: "The option you selected is " + data,
+                            showConfirmButton: false,
+                            timer: 1000,
+                            type: "error"
+                        });
+                        $('#options').html("");
+                        if (!(Qcount >= Qarray.length)) {
+                            $('#question').html("");
+                            $('#question').html("<strong>Q " + (Qcount + 1) + ":  </strong>" + Qarray[Qcount]);
+                            $('.options').html("");
+                            for (var i = 0; i < Qoption[Qcount].length; i++) {
+                                $('.options').append("<label class=\"btn btn-default\"><input type=\"radio\" name=\"quiz\" id=\"option" + i + "\" value=\"" + i + "\"><span style='margin-left:5px;'>" + Qoption[Qcount][i] + " </span></label>");
+                            }
+
+                        }
+                        else {
+                            $('#endgame').append('<a id="qsub" class="btn btn-primary">Submit</a>');
+                        }
+                        Qcount += 1;
+                    }
+
+                    //window.location = 'https://rails-teach-vijayganesh7sankaran.c9users.io/quizzes/';
+                }
+            });
+
+
+        });
+
+        $(document).on('click', '#qsub', function() {
+
+            $.ajax({
+                url: "/submit",
+                type: "POST",
+                success: function(data) {
+                    console.log('happens');
+                    window.location ="/games";
+                }
+
+            });
+        });
+        
+        
+        function rearrange() {
+            //$('#group').html(dup.html());
+            
+            
+                            $('.quest').fadeIn(1000);
+                            $('.panel').animate({
+                                left: "-=23%"
+                            }, 1000, function() {
+                                $('h2').fadeOut(1000);
+            
+                            });
+                     
+            
+            $('#options').html("");
+            if (!(Qcount >= Qarray.length)) {
+                $('#question').html("");
+                $('#question').html("<strong>Q " + (Qcount + 1) + ":  </strong>" + Qarray[Qcount]);
+                $('#myimg').attr('src',imgurl[Qcount+1]);
+                $('#idesc').children(0).text(imgdesc[Qcount+1]);
+                $('.options').html("");
+                for (var i = 0; i < Qoption[Qcount].length; i++) {
+                    $('.options').append("<label class=\"btn btn-default\"><input type=\"radio\" name=\"quiz\" id=\"option" + i + "\" value=\"" + i + "\"><span style='margin-left:5px;'>" + Qoption[Qcount][i] + " </span></label><br />");
+                }
+
+            }
+            else {
+                $('#endgame').append('<a id="qsub" class="btn btn-primary">Submit</a>');
+            }
+
+            Qcount += 1;
+        }
+        
+    });
+</script>

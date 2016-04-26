@@ -69,6 +69,10 @@ class QuizzesController < ApplicationController
   end
   
   def games
+   @src = @@badge_beg
+   print @src
+   @@badge_beg = 0
+   
     @user1 = User.find_by_id(current_user.id)
     if @user1.role == "admin"
       render layout: "adminHomepage"
@@ -103,13 +107,13 @@ class QuizzesController < ApplicationController
     @cat = Category.find_by_category_name( @category)
     @m_quiz = Quiz.where(:category_id => @cat.id)
     
-    @my_json = "{ \"quiz_name\": [ "
+    @my_json = "{ \"quizzes\": [ "
     l=0
     @m_quiz.each do |m|
       if(!(l == (@m_quiz.length-1)))
-        @my_json<<"\""<<m.quiz_name+"\""+", "
+        @my_json<<"{ \"qn\" : \""<<m.quiz_name+"\""+", "+"\"qid\" : \""<<m.id.to_s+"\" },"
       else
-        @my_json<<"\""<<m.quiz_name<<"\""
+       @my_json<<"{ \"qn\" : \""<<m.quiz_name+"\""+", "+"\"qid\" : \""<<m.id.to_s+"\" }"
       end
       l+=1
     end

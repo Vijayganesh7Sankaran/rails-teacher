@@ -1,0 +1,27 @@
+ /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+ /*.row.content {height: 1500px}*/
+ /* Set gray background color and 100% height */
+ /*.sidenav {*/
+ /*  background-color: #f1f1f1;*/
+ /*  height: 100%;*/
+ /*}*/
+ /* Set black background color, white text and some padding */
+ /*footer {*/
+ /*  background-color: #f2f2f2;*/
+ /*  color:#00ffcc;*/
+ /*  padding: 25px;*/
+ /*}*/
+ /* On small screens, set height to 'auto' for sidenav and grid */
+ 
+ @media screen and (max-width: 767px) {
+   .jumbotron {
+     padding-top: 30px;
+     padding-bottom: 48px;
+   }
+   /*.sidenav {*/
+   /*  height: auto;*/
+   /*  padding: 100px;*/
+   /*}*/
+   /*.row.content {height: auto;} */
+ }
+ 

@@ -117,6 +117,7 @@ body.nav-sm .profile {
 }
 .profile_info h2 {
   font-size: 14px;
+  padding: 5px;
   color: #ECF0F1;
   margin: 0;
   font-weight: 300;

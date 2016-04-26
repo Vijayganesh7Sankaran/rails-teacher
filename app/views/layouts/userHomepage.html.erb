@@ -7,11 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GamE-Learn | A fun way to learning</title>
-      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-      <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
     <!-- Bootstrap core CSS -->
     <link href="../dists/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../dists/js/jquery.min.js"></script>
+    <script src="../dists/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../dists/css/bootstrap-select/bootstrap-select.min.css">
+    <script type="text/javascript" src="../dists/js/bootstrap-select/bootstrap-select.min.js"></script>
     <link href="../dists/fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="../dists/css/animate.min.css" rel="stylesheet">
     <!-- Custom styling plus plugins -->
@@ -20,6 +24,10 @@
     <link href="../dists/css/icheck/flat/green.css" rel="stylesheet" />
     <link href="../dists/css/floatexamples.css" rel="stylesheet" type="text/css" />
     <link href="../dists/css/sweetalert.css" rel="stylesheet" type="text/css" />
+    <script src="../dists/js/sweetalert.min.js"></script>
+    <script src="../dists/js/nprogress.js"></script>
+    <script src="../dists/js/easypie/jquery.easypiechart.min.js"></script> 
+    <script src="quotations.js"> </script>
     <!--[if lt IE 9]>
     <script src="../assets/js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
@@ -29,11 +37,15 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="../dists/fonts/comfortaa/stylesheet.css" rel="stylesheet" type="text/css" />
-    <script src="../dists/js/jquery-2.2.3.min.js"></script>
-    <script src="../dists/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../dists/css/bootstrap-select/bootstrap-select.min.css">
-    <script src="../dists/js/bootstrap-select/bootstrap-select.min.js"></script>
-    
+    <link type="text/css" rel="stylesheet" href="../dists/css/quotegame.css">
+    <script src="../dists/js/main2.js" type="text/javascript">
+    </script>
+    <script src="../dists/js/jquery.mobile.custom.min.js"></script>
+    <!-- Resource jQuery -->
+    <link type="text/css" rel="stylesheet" href="../dists/css/style.css">
+    <!-- Resource style -->
+    <script src="../dists/js/modernizr.js"></script>
+        
     <style>
         .vl-sidebar-block {
             margin: 5px 10% 5px 10%;
@@ -99,7 +111,25 @@
         body > dl {
             display: none;
         }
+        
+        @media (min-width: 768px){
+            #right {
+            overflow-y: scroll;
+          }
+        }
     </style>
+    <script type="text/javascript" src="http://www.quotationspage.com/data/1mqotd.js">
+    </script>
+    <style>
+        .tqpFooter {
+            display: none;
+        }
+
+        body > b, body > br, body > dl {
+            display: none;
+        }
+    </style>
+    <link type="text/css" rel="stylesheet" href="../dists/css/style.css">
 </head>
 
 <body class="nav-md">
@@ -192,7 +222,7 @@
                                             <a href="#">My Friends</a>
                                         </li>
                                         <li>
-                                            <a href="#">Leaderboard</a>
+                                            <a href="/badges/view">Leaderboard</a>
                                         </li>
                                         <li>
                                             <a href="#">My Blog</a>
@@ -288,7 +318,7 @@
                     <li>
                         <a>
                             <span class="image">
-                                                    <img src="images/img.jpg" alt="Profile Image">
+                                                    <!--<img src="/css/images/img.jpg" alt="Profile Image">-->
                                                 </span>
                             <span>
                                                     <span>John Smith</span>
@@ -302,7 +332,7 @@
                     <li>
                         <a>
                             <span class="image">
-                                                    <img src="images/img.jpg" alt="Profile Image">
+                                                    <!--<img src="/css/images/img.jpg" alt="Profile Image">-->
                                                 </span>
                             <span>
                                                     <span>John Smith</span>
@@ -316,7 +346,7 @@
                     <li>
                         <a>
                             <span class="image">
-                                                    <img src="images/img.jpg" alt="Profile Image">
+                                                    <!--<img src="images/img.jpg" alt="Profile Image">-->
                                                 </span>
                             <span>
                                                     <span>John Smith</span>
@@ -348,13 +378,17 @@
         <div style="margin-top: 60px;">
             </div>
                 
-                <div class="sizer">
+                
                 <%= yield %>
-                </div> <br /> 
-                <!-- footer content --> 
-                <footer>
-                    <div class="pull-right"> Gam<span style="color: #1ABB9C;">E-Learn</span> - Gamified way of Learning by - <a href="http://www.tcs.com/" style="color:#05befa; font-size:medium;">TCS</a> </div>
-                    <div class="clearfix"> </div>
+                 <br /> 
+                <!-- footer content -->
+                <footer style="position:relative; bottom:0;">
+                    <div class="pull-right">
+                        Gam<span style="color: #1ABB9C;">E-Learn</span> - Gamified way of Learning by - <a href="http://www.tcs.com/" style="color:#05befa; font-size:medium;">TCS</a>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
                 </footer>
                 <!-- /footer content -->
                 <!-- /page content -->
@@ -362,126 +396,129 @@
                 <!-- /page content -->
                 </div>
                 </div>
-                <div id="custom_notifications" class="custom-notifications dsp_none">
-                    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
-                    <div class="clearfix"></div>
-                    <div id="notif-group" class="tabbed_notifications"></div>
-                </div>
-                <script type="text/javascript" src="http://www.quotationspage.com/data/1mqotd.js">
-                </script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-                <script src="../dists/js/nprogress.js"></script>
-                <script src="../dists/js/sweetalert.min.js"></script>
-                <!-- gauge js -->
-                <script type="text/javascript" src="../dists/js/gauge/gauge.min.js"></script>
-                <script type="text/javascript" src="../dists/js/gauge/gauge_demo.js"></script>
-                <!-- chart js -->
-                <script src="../dists/js/chartjs/chart.min.js"></script>
-                <!-- bootstrap progress js -->
-                <script src="../dists/js/progressbar/bootstrap-progressbar.min.js"></script>
-                <!-- icheck -->
-                <script src="../dists/js/icheck/icheck.min.js"></script>
-                <!-- daterangepicker -->
-                <script type="text/javascript" src="../dists/js/moment/moment.min.js"></script>
-                <script type="text/javascript" src="../dists/js/datepicker/daterangepicker.js"></script>
-                <script src="../dists/js/custom.js"></script>
-                <!-- flot js -->
-                <!--[if lte IE 8]><script type="text/javascript" src="../dists/js/excanvas.min.js"></script><![endif]-->
-                <script type="text/javascript" src="../dists/js/flot/jquery.flot.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/jquery.flot.pie.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/jquery.flot.orderBars.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/jquery.flot.time.min.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/date.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/jquery.flot.spline.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/jquery.flot.stack.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/curvedLines.js"></script>
-                <script type="text/javascript" src="../dists/js/flot/jquery.flot.resize.js"></script>
-                <!-- worldmap -->
-                <script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-2.0.3.min.js"></script>
-                <script type="text/javascript" src="../dists/js/maps/gdp-data.js"></script>
-                <script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-world-mill-en.js"></script>
-                <script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-us-aea-en.js"></script>
-                <!-- pace -->
-                <script src="../dists/js/pace/pace.min.js"></script>
-                <!-- skycons -->
-                <script src="../dists/js/skycons/skycons.min.js"></script>
-                <script>
-                    NProgress.done();</script> <!--fullscreen--> 
-                <script> function toggleFullscreen(elem) {
-                    elem=elem || document.documentElement;
-                    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-                        if (elem.requestFullscreen) {
-                            elem.requestFullscreen();
-                        }
-                        else if (elem.msRequestFullscreen) {
-                            elem.msRequestFullscreen();
-                        }
-                        else if (elem.mozRequestFullScreen) {
-                            elem.mozRequestFullScreen();
-                        }
-                        else if (elem.webkitRequestFullscreen) {
-                            elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-                        }
-                    }
-                    else {
-                        if (document.exitFullscreen) {
-                            document.exitFullscreen();
-                        }
-                        else if (document.msExitFullscreen) {
-                            document.msExitFullscreen();
-                        }
-                        else if (document.mozCancelFullScreen) {
-                            document.mozCancelFullScreen();
-                        }
-                        else if (document.webkitExitFullscreen) {
-                            document.webkitExitFullscreen();
-                        }
-                    }
-                }
-                
-                document.getElementById('fullScreenBtn').addEventListener('click', function () {
-                    toggleFullscreen();
-                });
-                </script> <!--/fullscreen--> <script> $(document).ready(function() {
-                    if($(window).outerHeight(true) > $('.sizer').outerHeight(true)) {
-                        $('footer').css('margin-top', $(window).outerHeight(true) - 145 - $('.sizer').outerHeight(true));
-                    }
-                    console.log($(window).outerHeight(true));
-                    console.log($('.sizer').outerHeight(true));
-                });
-                </script> 
-                <script> 
-                // $(document).ready(function(){
-                //     if(document.URL.indexOf("#") == -1){
-                //         url = document.URL + "#";
-                //         location = "#";
-                //         location.reload(true);
-                //     }
-                // });
-                </script> 
-                <script src="../dists/js/easypie/jquery.easypiechart.min.js"></script> 
-                <script>
-    
-    $(function() {
-      $('.chart').easyPieChart({
-        easing: 'easeOutElastic',
-        delay: 3000,
-        barColor: '#26B99A',
-        trackColor: '#fff',
-        scaleColor: false,
-        lineWidth: 10,
-        trackWidth: 10,
-        lineCap: 'butt',
-        onStep: function(from, to, percent) {
-          $(this.el).find('.percent').text(Math.round(percent));
+<div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+</div>
+<script type="text/javascript" src="http://www.quotationspage.com/data/1mqotd.js">
+</script>
+<script src="../dists/js/nprogress.js"></script>
+<script src="../dists/js/sweetalert.min.js"></script>
+<!-- gauge js -->
+<script type="text/javascript" src="../dists/js/gauge/gauge.min.js"></script>
+<script type="text/javascript" src="../dists/js/gauge/gauge_demo.js"></script>
+<!-- chart js -->
+<script src="../dists/js/chartjs/chart.min.js"></script>
+<!-- bootstrap progress js -->
+<script src="../dists/js/progressbar/bootstrap-progressbar.min.js"></script>
+<!-- icheck -->
+<script src="../dists/js/icheck/icheck.min.js"></script>
+<!-- daterangepicker -->
+<script type="text/javascript" src="../dists/js/moment/moment.min.js"></script>
+<script type="text/javascript" src="../dists/js/datepicker/daterangepicker.js"></script>
+<script src="../dists/js/custom.js"></script>
+<!-- flot js -->
+<!--[if lte IE 8]><script type="text/javascript" src="../dists/js/excanvas.min.js"></script><![endif]-->
+<script type="text/javascript" src="../dists/js/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="../dists/js/flot/jquery.flot.pie.js"></script>
+<script type="text/javascript" src="../dists/js/flot/jquery.flot.orderBars.js"></script>
+<script type="text/javascript" src="../dists/js/flot/jquery.flot.time.min.js"></script>
+<script type="text/javascript" src="../dists/js/flot/date.js"></script>
+<script type="text/javascript" src="../dists/js/flot/jquery.flot.spline.js"></script>
+<script type="text/javascript" src="../dists/js/flot/jquery.flot.stack.js"></script>
+<script type="text/javascript" src="../dists/js/flot/curvedLines.js"></script>
+<script type="text/javascript" src="../dists/js/flot/jquery.flot.resize.js"></script>
+<!-- worldmap -->
+<script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-2.0.3.min.js"></script>
+<script type="text/javascript" src="../dists/js/maps/gdp-data.js"></script>
+<script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-world-mill-en.js"></script>
+<script type="text/javascript" src="../dists/js/maps/jquery-jvectormap-us-aea-en.js"></script>
+<!-- pace -->
+<script src="../dists/js/pace/pace.min.js"></script>
+<!-- skycons -->
+<script src="../dists/js/skycons/skycons.min.js"></script>
+<script>
+    NProgress.done();
+</script>
+<!--fullscreen-->
+<script>
+    function toggleFullscreen(elem) {
+        elem = elem || document.documentElement;
+        if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            }
+            else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+            else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            }
+            else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
         }
-      });
-      var chart = window.chart = $('.chart').data('easyPieChart');
-      $('.js_update').on('click', function() {
-        chart.update(Math.random() * 200 - 100);
-      });
+        else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+            else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            }
+            else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+    }
+
+    document.getElementById('fullScreenBtn').addEventListener('click', function() {
+        toggleFullscreen();
     });
-  
-    </script>
+</script>
+<!--/fullscreen-->
+<script>
+    $(document).ready(function() {
+        if ($(window).outerHeight(true) > $('.sizer').outerHeight(true)) {
+            $('footer').css('margin-top', $(window).outerHeight(true) - 145 - $('.sizer').outerHeight(true));
+        }
+        console.log($(window).outerHeight(true));
+        console.log($('.sizer').outerHeight(true));
+    });
+</script>
+<script>
+    // $(document).ready(function(){
+    //     if(document.URL.indexOf("#") == -1){
+    //         url = document.URL + "#";
+    //         location = "#";
+    //         location.reload(true);
+    //     }
+    // });
+</script>
+<script src="../dists/js/easypie/jquery.easypiechart.min.js"></script>
+<script>
+    $(function() {
+        $('.chart').easyPieChart({
+            easing: 'easeOutElastic',
+            delay: 3000,
+            barColor: '#26B99A',
+            trackColor: '#fff',
+            scaleColor: false,
+            lineWidth: 10,
+            trackWidth: 10,
+            lineCap: 'butt',
+            onStep: function(from, to, percent) {
+                $(this.el).find('.percent').text(Math.round(percent));
+            }
+        });
+        var chart = window.chart = $('.chart').data('easyPieChart');
+        $('.js_update').on('click', function() {
+            chart.update(Math.random() * 200 - 100);
+        });
+    });
+</script>
 </body>
 </html>

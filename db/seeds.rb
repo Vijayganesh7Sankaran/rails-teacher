@@ -6,3 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create(first_name: 'Ashish', last_name: 'MG', email: 'amg366@gmail.com', role: 'admin', password: 'fantastic4')
+Ubadge.create(badge_name: 'Beginner', url: '/assets/badge_images/beginer.png')
+Ubadge.create(badge_name: 'Average', url: '/assets/badge_images/silverbadge.png')
+Ubadge.create(badge_name: 'Genius', url: '/assets/badge_images/genius_badge.jpg')

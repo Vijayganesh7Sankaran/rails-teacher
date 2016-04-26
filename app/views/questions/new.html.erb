@@ -2,6 +2,89 @@
 	.input-group-addon {
 		width: 0%;
 	}
+	
+	.switch {
+		position: relative;
+		height: 26px;
+		width: 120px;
+		background: rgba(0, 0, 0, 0.25);
+		border-radius: 3px;
+		-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	}
+	
+	.switch-label {
+		position: relative;
+		z-index: 2;
+		float: left;
+		width: 58px;
+		line-height: 26px;
+		font-size: 11px;
+		color: white;
+		text-align: center;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+		cursor: pointer;
+	}
+	
+	.switch-label:active {
+		font-weight: bold;
+	}
+	
+	.switch-label-off {
+		padding-left: 2px;
+	}
+	
+	.switch-label-on {
+		padding-right: 2px;
+	}
+	/*
+  Note: using adjacent or general sibling selectors 
+  combined with pseudo classes doesn't work in Safari 
+  5.0 and Chrome 12.
+  See this article for more info and a potential fix: 
+  http://css-tricks.com/webkit-sibling-bug/
+*/
+	
+	.switch-input {
+		display: none;
+	}
+	
+	.switch-input:checked + .switch-label {
+		font-weight: bold;
+		color: rgba(0, 0, 0, 0.65);
+		text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+		-webkit-transition: 0.15s ease-out;
+		-moz-transition: 0.15s ease-out;
+		-o-transition: 0.15s ease-out;
+		transition: 0.15s ease-out;
+	}
+	
+	.switch-input:checked + .switch-label-on ~ .switch-selection {
+		/* Note: left: 50% doesn't transition in WebKit */
+		left: 60px;
+	}
+	
+	.switch-selection {
+		display: block;
+		position: absolute;
+		z-index: 1;
+		top: 2px;
+		left: 2px;
+		width: 58px;
+		height: 22px;
+		background: #65bd63;
+		border-radius: 3px;
+		background-image: -webkit-linear-gradient(top, #9dd993, #65bd63);
+		background-image: -moz-linear-gradient(top, #9dd993, #65bd63);
+		background-image: -o-linear-gradient(top, #9dd993, #65bd63);
+		background-image: linear-gradient(to bottom, #9dd993, #65bd63);
+		-webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+		box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+		-webkit-transition: left 0.15s ease-out;
+		-moz-transition: left 0.15s ease-out;
+		-o-transition: left 0.15s ease-out;
+		transition: left 0.15s ease-out;
+	}
 </style>
 
 <div class="">
@@ -27,9 +110,25 @@
 				<div class="x_title">
 					<h2>New Question <small> - please add a few questions &amp; options.</small></h2>
 					<div class="clearfix"></div>
-				</div>
+				</div					>
 				<div class="x_content">
 					<br />
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-2" style="positon:relative;top:-8px">
+								<h2>For creating Jigsaw-Tron</h2>
+							</div>
+							<div class="col-md-2">
+								<div class="switch">
+									<input type="radio" class="switch-input" name="view" value="week" id="week" checked>
+									<label for="week" class="switch-label switch-label-off">Off</label>
+									<input type="radio" class="switch-input" name="view" value="month" id="month">
+									<label for="month" class="switch-label switch-label-on">On</label>
+									<span class="switch-selection"></span>
+								</div>
+							</div>
+						</div>
+					</div>
 					<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 						<div class="row">
 							<div style="margin-top:3em" class="col-md-8 col-sm-8 col-xs-8">
@@ -39,9 +138,18 @@
 										<div id="questionText1" class="questionText">
 											<h2>Question:</h2>
 											<input type="text" id="Question1" class="form-control formtext" />
-											<br /> <h2>Points:</h2>
+											<br />
+											<div class="imgtog" style="display:none;">
+											<h2>Image Url:</h2>
+											<input type="text" id="imgurl1" class="form-control formtext1" />
+											<br /><h2>Image description/Trivia:</h2>
+											<input  type="text" id="imgdesc1" class="form-control formtext1" />
+											<br />
+											</div>
+											<h2>Points:</h2>
 											<input style="width:10%" type="number" id="pts1" class="form-control formtext" />
-											<br/>
+											<br />
+											
 										</div>
 										<div id="Quiz1options">
 											<div id="Quiz1Q1option1">
@@ -135,7 +243,10 @@
 
 			var questionSurr = $('#questionText' + questionCount).clone();
 			questionSurr.find('#Question' + questionCount).attr('id', 'Question' + (questionCount + 1));
+			questionSurr.find('#imgurl' + questionCount).attr('id', 'imgurl' + (questionCount + 1));
 			questionSurr.find('#pts' + questionCount).attr('id', 'pts' + (questionCount + 1));
+			questionSurr.find('#imgdesc' + questionCount).attr('id', 'imgdesc' + (questionCount + 1));
+			
 			var contSurr = '<div id="Quiz' + (questionCount + 1) + '" class="questionsField well"><a href="javascript:void(0);" class="removeQ"><span class="glyphicon glyphicon-trash pull-right"></span></a><div id="questionText' + (questionCount + 1) + '"">' + questionSurr.html() + '</div><div id="Quiz' + (questionCount + 1) + 'options">' + optionSurr1 + optionSurr2 + '</div>';
 			$(contSurr).find('#Question' + (questionCount)).attr('id', 'Question');
 			$('.questionField').append(contSurr)
@@ -219,6 +330,8 @@
 					cont.find('#Quiz'+i).attr('id','Quiz'+(i-1));
 					cont.find('#questionText'+i).attr('id','questionText'+(i-1));
 					cont.find('#pts'+i).attr('id','pts'+(i-1));
+					cont.find('#imgurl'+i).attr('id','imgurl'+(i-1));
+					cont.find('#imgdesc'+i).attr('id','imgdesc'+(i-1));
 					cont.find('#Question'+i).attr('id','Question'+(i-1));
 					cont.find('#Quiz'+i+'options').attr('id','Quiz'+(i-1)+'options');
 					cont.find('input[name="optradio'+i+'"]').attr('name','optradio'+(i-1));
@@ -310,6 +423,7 @@
 		var questConstraint = true;
 		var optionConstraint = true;
 		var radioConstraint = true;
+		var forjigsaw = false;
 		$('.questionField, #addQ, .addO').click(function(){
 			
 		if(toggleTextfieldColor === true)
@@ -328,6 +442,13 @@
 			
 			var isValid = true;
 			alert(questionCount);
+			
+			if($('#month').is(':checked')) { 
+				
+				forjigsaw = true;
+				
+			}
+			
 			$('.formtext').each(function() {
 				if ($.trim($(this).val()) == '') {
 					isValid = false;
@@ -346,6 +467,29 @@
 				}
 			
 			});
+			if(forjigsaw === true){
+				$('.formtext1').each(function() {
+						if ($.trim($(this).val()) == '') {
+							isValid = false;
+							allFieldFull = false;
+							toggleTextfieldColor = true;
+							$(this).css({
+								"border": "1px solid red",
+								"background": "#FFCECE"
+							});
+						}
+						else {
+							$(this).css({
+								"border": "",
+								"background": ""
+							});
+						
+				
+							
+						}
+					
+							});
+			}
 			for (var i = 1; i < questionCount; i++) {
 				if (Qoption[i] > 6) {
 			  		isValid = false;
@@ -390,6 +534,8 @@
 				var Oarray = [];
 				var Carray = [];
 				var Parray = [];
+				var imgurl = [];
+				var imgdesc = [];
 				var quiz_id = getUrlParameter('id');
 				for (var k = 0; k < questionCount; k++) {
 					Qarray[k] = $('#Question' + (k + 1)).val();
@@ -398,7 +544,17 @@
 				for (var c = 0; c <= questionCount; c++) {
 					Carray[c + 1] = $("input[name='optradio" + (c + 1) + "']:checked").val();
 				}
-
+				if(forjigsaw === true)
+				{
+					for (var q = 0; q <= questionCount; q++) {
+						imgurl[q + 1] = $("#imgurl" + (q + 1)).val();
+					}
+					
+					for (var q = 0; q <= questionCount; q++) {
+						imgdesc[q + 1] = $("#imgdesc" + (q + 1)).val();
+					}
+					
+				}
 				for (var q = 0; q <= questionCount; q++) {
 					Parray[q + 1] = $("#pts" + (q + 1)).val();
 				}
@@ -428,8 +584,32 @@
    						 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
   						}
 					});
-				
-				$.ajax({
+				if(forjigsaw === true)
+				{
+					$.ajax({
+					url: "/questions/show",
+					type: "POST",
+					data: {
+						"quiz_id": quiz_id,
+						"question": Qarray,
+						"option": Oarray,
+						"coption": Carray,
+						"pts": Parray,
+						"imgurl": imgurl,
+						"imgdesc": imgdesc
+					},
+					success: function(data) {
+						console.log(data + ' entered successfully');
+						swal('Quiz added successfully');
+						//window.location = '/quizzes';
+
+						}
+
+					});
+				}
+				else
+				{
+					$.ajax({
 					url: "/questions/show",
 					type: "POST",
 					data: {
@@ -444,15 +624,18 @@
 						swal('Quiz added successfully');
 						//window.location = '/quizzes';
 
-					}
+						}
 
-				});
+					});
+				}
+				
 
 			}
 
 			else {
 				if(allFieldFull === false && questConstraint === true && optionConstraint === true && radioConstraint === true)
 				{
+					console.log(questConstraint+" "+optionConstraint+" "+radioConstraint);
 				swal("Oops...", "Please enter all the fields", "error");
 				}
 				
@@ -470,7 +653,19 @@
 			}
 
 		});
-
+		
+		
+		$('.switch-input').click(function(){
+			if($('#month').is(':checked')) { 
+				
+				$('.imgtog').css('display','block');
+				
+			}
+			else
+			{
+				$('.imgtog').css('display','none');
+			}
+		});
 
 	});
 </script>

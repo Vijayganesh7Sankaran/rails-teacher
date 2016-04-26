@@ -1,6 +1,22 @@
 <div class="listing" >
 <%@adm.each do |t| %>
-<%=link_to t.quiz_name,{:controller =>"questions", :action =>"view" ,:id =>t.id} %>
+ <table>
+    <tr>
+         <td colspan="4">
+    <a href="/questions/view?id=<%= t.id %>" class="btn btn-sq-lg btn-success">
+                <i class="fa fa-user fa-5x"></i><br/>
+            
+               <%= t.quiz_name %> <br>  </a>
+               </td>
+               
+   </tr>
+    </table>
+<% end %>
 
-<%end%>
-</div>
+
+
+
+
+
+            
+          

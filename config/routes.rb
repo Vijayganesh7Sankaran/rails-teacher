@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   root 'users#new'
-
+ 
   get 'options/new'
 
   get 'options/create'
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post 'questions/show' => 'questions#show'
   post 'questions/ashiupdate' => 'questions#ashiupdate'
   post 'questions/ashidestroy' => 'questions#ashidestroy'
-
+  post '/submit' => 'attempt#submitresponse'
   post 'questions/create' => 'questions#create'
   get 'output' => 'questions#index'
 
@@ -27,11 +27,16 @@ Rails.application.routes.draw do
   
   get '/quizzes/retrieve_category' => 'quizzes#retrieve_category'
   get '/quizzes/retrieve_quiz' => 'quizzes#retrieve_quiz'
-  get '/the_chaostone' => 'game#thechaostone'
+  get '/thechaostone' => 'game#thechaostone'
+  get '/quotegamer' => 'game#quotegamer'
+  get '/captain' => 'game#captainplanet'
   get 'questions/destroy'
   get 'users/profile_pic'
   put 'users/update'
   get 'quiz' => 'quizzes#index'
+  
+  get 'badges/view' => 'badges#view'
+  get 'getchaos' => 'game#getstone'
 
   get 'admin' => 'quizzes#admin'
   get 'user' => 'quizzes#user'
@@ -44,6 +49,8 @@ Rails.application.routes.draw do
   
   get 'signup' => 'users#new'
   get '/questions/index' => 'questions#index'
+  get '/jigsawtron' => 'game#jigsawtron'
+  get '/thechaostone' => 'game#chaostone'
   resources :users
   resources :quizzes
   resources :questions
@@ -52,6 +59,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   post '/attempt/response' => 'attempt#quizresponse'
+  post '/game/response' => 'game#quizresponse'
 
   delete 'logout' => 'sessions#destroy'
   get 'gameview' => 'game#view'

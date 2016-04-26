@@ -23,6 +23,16 @@ class BadgesController < ApplicationController
   end
 
   def view
+    @leaderboard = Profile.order(tot_points: :desc)
+    
+    
+    
+    @user1 = User.find_by_id(current_user.id)
+     if @user1.role == "admin"
+       render layout: "adminHomepage"
+     else
+      render layout: "userHomepage"
+    end
   end
 
   def update
